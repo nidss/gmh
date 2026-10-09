@@ -17,8 +17,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=15">
-  <script src="script.js?v=15" defer></script>
+  <link rel="stylesheet" href="styles.css?v=16">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="script.js?v=16" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#explore" data-th="ข้ามไปยังเมนูสำรวจ" data-en="Skip to explore menu">ข้ามไปยังเมนูสำรวจ</a>
@@ -50,6 +51,8 @@
         </div>
       </div>
     </div>
+    <button class="edge-cue edge-prev" type="button"><span class="edge-arrow" aria-hidden="true">‹</span><span class="edge-label"></span></button>
+    <button class="edge-cue edge-next" type="button"><span class="edge-label"></span><span class="edge-arrow" aria-hidden="true">›</span></button>
     <nav class="explore-menu" id="explore" tabindex="-1" aria-label="เมนูสำรวจ Go More Hub">
       <button id="explore-toggle" aria-expanded="false" aria-controls="explore-list"><span class="menu-symbol" aria-hidden="true">✳</span><span data-th="สำรวจ" data-en="Explore">สำรวจ</span><span class="menu-chevron" aria-hidden="true">⌃</span></button>
       <div id="explore-list" hidden>

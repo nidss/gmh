@@ -41,6 +41,7 @@
     document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
     document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove — เร็ว ๆ นี้' : 'ThaiMove — Coming Soon');
     motionLabels();
+    updateCues();
     writePreference('gmh-language', next);
   }
   function setMotion(value) {
@@ -82,7 +83,14 @@
   });
   document.addEventListener('click', async event => {
     const trigger = event.target.closest('[data-open]');
-    if (trigger) { openPanel(trigger.dataset.open, trigger); return; }
+    if (trigger) {
+      const stop = camera.mode === 'pan' && exploreList.contains(trigger) && STOPS.find(item => item.panels.includes(trigger.dataset.open));
+      if (stop && Math.abs(centreOf(stop) - viewport.scrollLeft) > viewport.clientWidth * .25) {
+        closeExplore();
+        glide(centreOf(stop), 650).then(() => openPanel(trigger.dataset.open, trigger));
+      } else openPanel(trigger.dataset.open, trigger);
+      return;
+    }
     if (!event.target.closest('#explore')) closeExplore();
     const copy = event.target.closest('[data-copy]');
     if (copy) {
@@ -126,22 +134,160 @@
     target.dataset.en = idea[1];
     target.textContent = idea[language === 'th' ? 0 : 1];
   }
-  let wasMobile = false;
+  // Camera: every screen sees the same world. Wide screens fit all four objects; tall or narrow screens pan along the desk.
+  const SCENE_W = 2926, SCENE_H = 1081;
+  // Object bounds on the native canvas (from the measured positions in styles.css), with a small margin.
+  const SAFE = { x0:.245, x1:.83, y0:.33, y1:1 };
+  const NOTE_H = .1386 * SCENE_H;
+  const STOPS = [
+    { x:.325, label:'About · Contact', panels:['about', 'contact'] },
+    { x:.502, label:'ThaiMove', panels:['thaimove'] },
+    { x:.753, label:'Villadd', panels:['villadd'] }
+  ];
+  const header = document.querySelector('.site-header');
+  const footerItems = [...document.querySelectorAll('.site-footer > *'), exploreButton];
+  const cues = [document.querySelector('.edge-prev'), document.querySelector('.edge-next')];
+  const stopMarkers = STOPS.map(() => {
+    const marker = document.createElement('span');
+    marker.className = 'scene-stop';
+    marker.setAttribute('aria-hidden', 'true');
+    viewport.append(marker);
+    return marker;
+  });
+  const camera = { mode:'', width:0 };
+  let tween = 0, tourTimer = 0, cueFrame = 0;
+  // Keep a range centred on the safe zone, covering the screen where possible, but never hide an object under the controls.
+  function place(size, view, low, high, start, end) {
+    let position = (low + high) / 2 - (start + end) / 2 * size;
+    position = size >= view ? Math.min(0, Math.max(view - size, position)) : (view - size) / 2;
+    return Math.max(low - start * size, Math.min(high - end * size, position));
+  }
+  const centreOf = stop => stop.x * camera.width - viewport.clientWidth / 2;
   function fitScene() {
-    const mobile = matchMedia('(max-width:700px)').matches;
-    if (mobile && !wasMobile) {
-      viewport.scrollLeft = Math.max(0, world.clientWidth * .34 - viewport.clientWidth / 2);
-      viewport.scrollTop = Math.max(0, world.clientHeight - viewport.clientHeight);
+    root.classList.add('camera-ready');
+    const vw = viewport.clientWidth, vh = viewport.clientHeight;
+    const focus = camera.mode === 'pan' ? (viewport.scrollLeft + vw / 2) / camera.width : STOPS[1].x;
+    const top = header.getBoundingClientRect().bottom + 10;
+    const bottom = vh - Math.min(vh, ...footerItems.filter(item => item.offsetHeight).map(item => item.getBoundingClientRect().top)) + 10;
+    const availableH = Math.max(120, vh - top - bottom);
+    const safeW = (SAFE.x1 - SAFE.x0) * SCENE_W, safeH = (SAFE.y1 - SAFE.y0) * SCENE_H;
+    const fitScale = Math.min((vw - 32) / safeW, availableH / safeH, Math.max(vw / SCENE_W, vh / SCENE_H));
+    // Fit only while the smallest note stays easy to tap and the scene fills most of the screen height.
+    const mode = fitScale * NOTE_H >= 46 && fitScale * SCENE_H >= vh * .55 ? 'fit' : 'pan';
+    let scale = fitScale;
+    if (mode === 'pan') {
+      const share = Math.min(.8, Math.max(.45, vw / 1000));
+      scale = Math.max(fitScale, Math.min(vw / (share * safeW), availableH / SCENE_H));
     }
-    wasMobile = mobile;
+    const width = Math.round(SCENE_W * scale), height = Math.round(SCENE_H * scale);
+    const x = mode === 'fit' ? place(width, vw, 16, vw - 16, SAFE.x0, SAFE.x1) : Math.max(0, (vw - width) / 2);
+    const y = place(height, vh, top, vh - bottom, SAFE.y0, SAFE.y1);
+    root.style.setProperty('--world-w', width + 'px');
+    root.style.setProperty('--world-x', Math.round(x) + 'px');
+    root.style.setProperty('--world-y', Math.round(y) + 'px');
+    root.style.setProperty('--cue-y', Math.round(y + height * .2) + 'px');
+    root.classList.toggle('scene-fit', mode === 'fit');
+    root.classList.toggle('scene-pan', mode === 'pan');
+    root.classList.toggle('scene-band', y > 1);
+    camera.mode = mode;
+    camera.width = width;
+    stopMarkers.forEach((marker, index) => { marker.style.left = Math.round(x + STOPS[index].x * width) + 'px'; });
+    if (mode === 'pan') viewport.scrollLeft = focus * width - vw / 2;
+    updateCues();
     ocean?.resize();
   }
+  // Point to the nearest object off each side of the screen, so people know there is more desk to explore.
+  function updateCues() {
+    cueFrame = 0;
+    const vw = viewport.clientWidth;
+    const onScreen = stop => stop.x * camera.width - viewport.scrollLeft;
+    const panning = camera.mode === 'pan' && camera.width > vw + 1;
+    const targets = panning ? [
+      STOPS.filter(stop => onScreen(stop) < vw * .1).pop(),
+      STOPS.find(stop => onScreen(stop) > vw * .9)
+    ] : [];
+    cues.forEach((cue, index) => {
+      const stop = targets[index];
+      cue.classList.toggle('is-visible', Boolean(stop));
+      if (!stop) return;
+      cue.dataset.stop = String(STOPS.indexOf(stop));
+      cue.querySelector('.edge-label').textContent = stop.label;
+      cue.setAttribute('aria-label', (language === 'th' ? 'เลื่อนไปที่ ' : 'Go to ') + stop.label);
+    });
+  }
+  function stopGlide() {
+    cancelAnimationFrame(tween);
+    clearTimeout(tourTimer);
+    root.classList.remove('camera-moving');
+  }
+  function glide(target, duration) {
+    stopGlide();
+    const from = viewport.scrollLeft;
+    const to = Math.max(0, Math.min(camera.width - viewport.clientWidth, target));
+    if (paused || reducedMotion.matches || Math.abs(to - from) < 2) {
+      viewport.scrollLeft = to;
+      return Promise.resolve();
+    }
+    // Snapping would fight the animated scroll, so it is switched off until the camera arrives.
+    root.classList.add('camera-moving');
+    return new Promise(resolve => {
+      const start = performance.now();
+      const step = now => {
+        const t = Math.min(1, (now - start) / duration);
+        viewport.scrollLeft = from + (to - from) * (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        if (t < 1) tween = requestAnimationFrame(step);
+        else { root.classList.remove('camera-moving'); resolve(); }
+      };
+      tween = requestAnimationFrame(step);
+    });
+  }
+  // On the first visit of a session, sweep once along the desk so every object is seen.
+  function tour() {
+    let seen = false;
+    try { seen = sessionStorage.getItem('gmh-tour') === '1'; sessionStorage.setItem('gmh-tour', '1'); } catch { /* Optional storage. */ }
+    if (seen || camera.mode !== 'pan' || paused || reducedMotion.matches || dialog.open) return;
+    glide(centreOf(STOPS[0]), 650)
+      .then(() => glide(centreOf(STOPS[2]), 1500))
+      .then(() => glide(centreOf(STOPS[1]), 850));
+  }
+  ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(type => viewport.addEventListener(type, stopGlide, { passive:true }));
+  viewport.addEventListener('scroll', () => { if (!cueFrame) cueFrame = requestAnimationFrame(updateCues); }, { passive:true });
+  cues.forEach(cue => cue.addEventListener('click', () => glide(centreOf(STOPS[Number(cue.dataset.stop)]), 700)));
   window.addEventListener('resize', fitScene, { passive:true });
   document.addEventListener('visibilitychange', () => ocean?.sync());
   document.querySelector('#year').textContent = new Date().getFullYear();
   setLanguage(language);
   setMotion(paused);
   fitScene();
+  const startTour = () => setTimeout(tour, 500);
+  const backdrop = document.querySelector('#world-background');
+  if (backdrop.complete) startTour(); else backdrop.addEventListener('load', startTour, { once:true });
+
+  // On phones the dialog is a paper sheet; pull it down from the top to close it.
+  const sheetLayout = matchMedia('(max-width:700px)');
+  let drag = null;
+  dialog.addEventListener('touchstart', event => {
+    drag = sheetLayout.matches && dialog.scrollTop <= 0 && event.touches.length === 1 ? { y:event.touches[0].clientY, distance:0 } : null;
+  }, { passive:true });
+  dialog.addEventListener('touchmove', event => {
+    if (!drag) return;
+    drag.distance = Math.max(0, event.touches[0].clientY - drag.y);
+    if (drag.distance > 0 && dialog.scrollTop <= 0) {
+      event.preventDefault();
+      dialog.style.transform = 'translateY(' + drag.distance + 'px)';
+    }
+  }, { passive:false });
+  dialog.addEventListener('touchend', () => {
+    if (!drag) return;
+    const dismiss = drag.distance > 90;
+    drag = null;
+    dialog.style.transition = 'transform .22s ease';
+    dialog.style.transform = dismiss ? 'translateY(100%)' : '';
+    setTimeout(() => {
+      dialog.style.transition = '';
+      if (dismiss) { dialog.close(); dialog.style.transform = ''; }
+    }, 230);
+  });
 
   // Animate only the water in the supplied background; the beach and window stay sharp.
   const image = document.querySelector('#world-background');
