@@ -137,7 +137,9 @@
   // Camera: every screen sees the same world. Wide screens fit all four objects; tall or narrow screens pan along the desk.
   const SCENE_W = 2926, SCENE_H = 1081;
   // Object bounds on the native canvas (from the measured positions in styles.css), with a small margin.
-  const SAFE = { x0:.245, x1:.83, y0:.33, y1:1 };
+  const SAFE = { x0:.245, x1:.83, y0:.33, y1:.98 };
+  // The supplied outpaint continues the scene 520px above and 200px below the original panorama.
+  const EXTEND_TOP = 520 / SCENE_H, EXTEND_BOTTOM = 200 / SCENE_H;
   const NOTE_H = .1386 * SCENE_H;
   const STOPS = [
     { x:.325, label:'About · Contact', panels:['about', 'contact'] },
@@ -145,7 +147,6 @@
     { x:.753, label:'Villadd', panels:['villadd'] }
   ];
   const header = document.querySelector('.site-header');
-  const footerItems = [...document.querySelectorAll('.site-footer > *'), exploreButton];
   const cues = [document.querySelector('.edge-prev'), document.querySelector('.edge-next')];
   const stopMarkers = STOPS.map(() => {
     const marker = document.createElement('span');
@@ -157,9 +158,12 @@
   const camera = { mode:'', width:0 };
   let tween = 0, tourTimer = 0, cueFrame = 0;
   // Keep a range centred on the safe zone, covering the screen where possible, but never hide an object under the controls.
-  function place(size, view, low, high, start, end) {
+  function place(size, view, low, high, start, end, before = 0, after = 0) {
     let position = (low + high) / 2 - (start + end) / 2 * size;
     position = size >= view ? Math.min(0, Math.max(view - size, position)) : (view - size) / 2;
+    // Where the panorama is shorter than the screen, the outpaint strips (before / after, in panorama heights) cover the rest.
+    const first = before * size, last = (1 + after) * size;
+    if (size < view) position = first + last >= view ? Math.min(first, Math.max(view - last, position)) : (view - last + first) / 2;
     return Math.max(low - start * size, Math.min(high - end * size, position));
   }
   const centreOf = stop => stop.x * camera.width - viewport.clientWidth / 2;
@@ -168,7 +172,7 @@
     const vw = viewport.clientWidth, vh = viewport.clientHeight;
     const focus = camera.mode === 'pan' ? (viewport.scrollLeft + vw / 2) / camera.width : STOPS[1].x;
     const top = header.getBoundingClientRect().bottom + 10;
-    const bottom = vh - Math.min(vh, ...footerItems.filter(item => item.offsetHeight).map(item => item.getBoundingClientRect().top)) + 10;
+    const bottom = 8;
     const availableH = Math.max(120, vh - top - bottom);
     const safeW = (SAFE.x1 - SAFE.x0) * SCENE_W, safeH = (SAFE.y1 - SAFE.y0) * SCENE_H;
     const fitScale = Math.min((vw - 32) / safeW, availableH / safeH, Math.max(vw / SCENE_W, vh / SCENE_H));
@@ -177,18 +181,17 @@
     let scale = fitScale;
     if (mode === 'pan') {
       const share = Math.min(.8, Math.max(.45, vw / 1000));
-      scale = Math.max(fitScale, Math.min(vw / (share * safeW), availableH / SCENE_H));
+      scale = Math.max(fitScale, Math.min(vw / (share * safeW), availableH / SCENE_H), vh / (SCENE_H * (1 + EXTEND_TOP + EXTEND_BOTTOM)));
     }
     const width = Math.round(SCENE_W * scale), height = Math.round(SCENE_H * scale);
     const x = mode === 'fit' ? place(width, vw, 16, vw - 16, SAFE.x0, SAFE.x1) : Math.max(0, (vw - width) / 2);
-    const y = place(height, vh, top, vh - bottom, SAFE.y0, SAFE.y1);
+    const y = place(height, vh, top, vh - bottom, SAFE.y0, SAFE.y1, EXTEND_TOP, EXTEND_BOTTOM);
     root.style.setProperty('--world-w', width + 'px');
     root.style.setProperty('--world-x', Math.round(x) + 'px');
     root.style.setProperty('--world-y', Math.round(y) + 'px');
     root.style.setProperty('--cue-y', Math.round(y + height * .2) + 'px');
     root.classList.toggle('scene-fit', mode === 'fit');
     root.classList.toggle('scene-pan', mode === 'pan');
-    root.classList.toggle('scene-band', y > 1);
     camera.mode = mode;
     camera.width = width;
     stopMarkers.forEach((marker, index) => { marker.style.left = Math.round(x + STOPS[index].x * width) + 'px'; });

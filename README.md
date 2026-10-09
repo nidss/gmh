@@ -22,9 +22,9 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 - The supplied post-it at the left window frame opens About Us.
 - The rotary phone on the left has a yellow Contact Us post-it and opens the contact panel. Its image is edited from the supplied phone with sunset lighting.
 - The supplied picture frame on the right opens Villadd. The wooden figure opens ThaiMove (Coming Soon).
-- The Explore menu also gives direct access to every section and Find Us On.
+- The Explore menu, motion pause and language switch sit together at the top right, so nothing covers the desk. The Explore menu also gives direct access to every section and Find Us On.
 - All four objects follow measured coordinates from the 2926 × 1081 placement reference. The supplied cutouts include their labels; no separate sticky notes or synthetic ground shadows are added.
-- One world on every screen: a camera fits all four objects on wide screens (desktop, iPad landscape, phone landscape) and pans along the desk on tall screens (phone and iPad portrait). The choice follows the measured object bounds and tap size, not a width breakpoint. A blurred copy of the scene fills any space the panorama cannot cover.
+- One world on every screen: a camera fits all four objects on wide screens (desktop, iPad landscape, phone landscape) and pans along the desk on tall screens (phone and iPad portrait). The choice follows the measured object bounds and tap size, not a width breakpoint. On screens taller than the panorama, the supplied outpaint strips continue the scene above and below; on wide screens the original panorama is shown exactly as before.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.
 - Thai / English switch with optional local preference storage.

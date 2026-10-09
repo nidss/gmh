@@ -85,6 +85,12 @@ Copied unchanged from the user's PNG files, preserving transparency and original
 - assets/villadd-logo.png — Logo_dark.png, 1543 × 447
 - assets/thaimove-logo.png — tmlogo.png, 1619 × 1340
 
+## Scene extension strips
+
+### assets/desk-extension-top.webp, assets/desk-extension-bottom.webp
+
+Supplied outpaint of desk-panorama.webp (2000 × 1231), continuing the scene upward (transom window, curtain rail) and downward (desk front). The original panorama sits unchanged at y = 520 of a 2926 × 1801 canvas; only the added areas are kept: top 2926 × 536 and bottom 2926 × 216, each overlapping the original by 16 px with a feathered alpha edge. They are upscaled from the supplied 2000 px width, so a full-resolution export can replace them with the same crop.
+
 ## Product concept images
 
 Original AI-generated illustrations, not photographs of bookable properties or screenshots of a released ThaiMove app.
