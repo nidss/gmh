@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20">
+  <link rel="stylesheet" href="styles.css?v=21">
   <script>document.documentElement.classList.add('js')</script>
   <script src="script.js?v=20" defer></script>
 </head>
@@ -78,7 +78,7 @@
     <div class="dialog-body" id="dialog-body"></div>
   </dialog>
     <template id="panel-products">
-    <span class="dialog-eyebrow">THE GO MORE HUB COLLECTION</span><h2>Our Products<span class="ink-spark">↗</span></h2>
+    <h2>Our Products<span class="ink-spark">↗</span></h2>
     <p class="dialog-lead" data-th="ออกไปพักผ่อน แล้วกลับมาขยับตัว" data-en="Good escapes. Meaningful movement.">ออกไปพักผ่อน แล้วกลับมาขยับตัว</p>
     <p data-th="รู้จักสองผลิตภัณฑ์จาก Go More Hub ที่ทำให้การพักผ่อนและการออกกำลังกายมีความหมายมากขึ้น" data-en="Meet two Go More Hub products built around getting away and getting moving.">รู้จักสองผลิตภัณฑ์จาก Go More Hub ที่ทำให้การพักผ่อนและการออกกำลังกายมีความหมายมากขึ้น</p>
     <div class="product-switches"><button data-open="villadd"><img src="assets/villadd-logo.png" alt="Villadd" width="1543" height="447"><span data-th="จองที่พักพูลวิลล่า" data-en="POOL VILLA GETAWAYS">จองที่พักพูลวิลล่า</span><b aria-hidden="true">↗</b></button><button data-open="thaimove"><img src="assets/thaimove-logo.png" alt="ThaiMove" width="1619" height="1340"><span>COMING SOON</span><b aria-hidden="true">↗</b></button></div>
@@ -86,14 +86,14 @@
   </template>
   <template id="panel-about">
     <div class="dialog-brand"><img src="assets/gomorehub-logo.png" alt="Go More Hub" width="2200" height="2201"></div>
-    <span class="dialog-eyebrow">01 / THE HUB</span><h2 >About Us<span class="ink-spark">✳</span></h2>
+    <h2 >About Us<span class="ink-spark">✳</span></h2>
     <p class="dialog-lead" data-th="เราเชื่อว่าชีวิตยังมีอะไรให้ค้นพบอีกมาก" data-en="We believe life has a little more to offer.">เราเชื่อว่าชีวิตยังมีอะไรให้ค้นพบอีกมาก</p>
     <p data-th="บริษัท โก มอร์ ฮับ จำกัด สร้างผลิตภัณฑ์ดิจิทัลจากสิ่งที่ผู้คนทำในทุกวัน ตั้งแต่การออกไปพักผ่อน ไปจนถึงการออกกำลังกาย เราเชื่อมเทคโนโลยีกับประสบการณ์จริง เพื่อให้ทุกวันมีโอกาสใหม่ ๆ มากขึ้น" data-en="Go More Hub Co., Ltd. builds digital products around everyday life. From getting away to getting moving, we connect technology with real experiences to open up new possibilities.">บริษัท โก มอร์ ฮับ จำกัด สร้างผลิตภัณฑ์ดิจิทัลจากสิ่งที่ผู้คนทำในทุกวัน ตั้งแต่การออกไปพักผ่อน ไปจนถึงการออกกำลังกาย เราเชื่อมเทคโนโลยีกับประสบการณ์จริง เพื่อให้ทุกวันมีโอกาสใหม่ ๆ มากขึ้น</p>
     <div class="product-switches"><button data-open="villadd"><img src="assets/villadd-logo.png" alt="Villadd" width="1543" height="447"><span data-th="จองที่พักพูลวิลล่า" data-en="POOL VILLA GETAWAYS">จองที่พักพูลวิลล่า</span><b aria-hidden="true">↗</b></button><button data-open="thaimove"><img src="assets/thaimove-logo.png" alt="ThaiMove" width="1619" height="1340"><span>COMING SOON</span><b aria-hidden="true">↗</b></button></div>
     <p class="dialog-signoff">GO MORE. LIVE MORE.</p>
   </template>
   <template id="panel-villadd">
-    <span class="dialog-eyebrow">02 / MORE ESCAPES</span><h2  class="sr-only">Villadd</h2>
+    <h2  class="sr-only">Villadd</h2>
     <img class="dialog-product-logo villadd-brand" src="assets/villadd-logo.png" alt="Villadd by Go More Hub" width="1543" height="447">
     <p class="dialog-lead" data-th="วันพักผ่อนดี ๆ เริ่มจากที่พักที่ใช่" data-en="Find your place. Make your escape.">วันพักผ่อนดี ๆ เริ่มจากที่พักที่ใช่</p>
     <img class="dialog-photo" src="assets/villadd.webp" alt="ภาพแนวคิดของพูลวิลล่าเขตร้อน ไม่ใช่ที่พักที่เปิดจอง" width="1536" height="1024">
@@ -102,16 +102,15 @@
     <p class="fine-print" data-th="ภาพสร้างสรรค์เพื่อสื่อถึงประสบการณ์ ไม่ใช่ที่พักที่เปิดจอง" data-en="Concept imagery. Not an actual property listing.">ภาพสร้างสรรค์เพื่อสื่อถึงประสบการณ์ ไม่ใช่ที่พักที่เปิดจอง</p>
   </template>
   <template id="panel-thaimove">
-    <span class="dialog-eyebrow">03 / MORE MOVEMENT</span><h2  class="sr-only">ThaiMove</h2>
+    <h2  class="sr-only">ThaiMove</h2>
     <img class="dialog-product-logo thaimove-brand" src="assets/thaimove-logo.png" alt="ThaiMove" width="1619" height="1340">
     <span class="dialog-status">COMING SOON</span><p class="dialog-lead" data-th="ทุกการเคลื่อนไหวมีความหมายมากขึ้น" data-en="Make every move mean a little more.">ทุกการเคลื่อนไหวมีความหมายมากขึ้น</p>
     <p data-th="เชื่อมต่อสถิติการออกกำลังกายจากแอป Third Party แล้วเปลี่ยนกิจกรรมของคุณให้เป็นคะแนนสำหรับแลกของรางวัล เพิ่มแรงจูงใจให้การขยับตัวในทุกวัน" data-en="Connect activity statistics from third-party fitness apps and turn your movement into points to redeem for rewards. More motivation to keep moving, every day.">เชื่อมต่อสถิติการออกกำลังกายจากแอป Third Party แล้วเปลี่ยนกิจกรรมของคุณให้เป็นคะแนนสำหรับแลกของรางวัล เพิ่มแรงจูงใจให้การขยับตัวในทุกวัน</p>
     <div class="move-steps"><span data-th="เชื่อมข้อมูล" data-en="CONNECT">เชื่อมข้อมูล</span><b aria-hidden="true">→</b><span data-th="สะสมคะแนน" data-en="EARN POINTS">สะสมคะแนน</span><b aria-hidden="true">→</b><span data-th="แลกรางวัล" data-en="GET REWARDS">แลกรางวัล</span></div>
-    <a class="dialog-cta mint-cta" href="https://nidss.github.io/thm2/" target="_blank" rel="noopener noreferrer"><span data-th="ดูตัวอย่าง ThaiMove" data-en="Preview ThaiMove">ดูตัวอย่าง ThaiMove</span><span aria-hidden="true">↗</span></a>
     <p class="fine-print" data-th="อยู่ระหว่างการพัฒนา — ยังไม่เปิดให้บริการเต็มรูปแบบ" data-en="In development — the full service is not yet available.">อยู่ระหว่างการพัฒนา — ยังไม่เปิดให้บริการเต็มรูปแบบ</p>
   </template>
   <template id="panel-contact">
-    <span class="dialog-eyebrow">04 / SAY HELLO</span><h2 >Contact Us<span class="ink-spark">↗</span></h2>
+    <h2 >Contact Us<span class="ink-spark">↗</span></h2>
     <p class="dialog-lead" data-th="ยินดีที่ได้รู้จักคุณ" data-en="It's good to meet you.">ยินดีที่ได้รู้จักคุณ</p>
     <div class="contact-block"><span class="field-label" data-th="บริษัท" data-en="COMPANY">บริษัท</span><p class="company-name" data-th="บริษัท โก มอร์ ฮับ จำกัด" data-en="Go More Hub Co., Ltd.">บริษัท โก มอร์ ฮับ จำกัด</p></div>
     <div class="contact-block"><span class="field-label" data-th="ที่อยู่" data-en="ADDRESS">ที่อยู่</span><address data-th="666/66 หมู่ที่ 5 ตำบลนาเกลือ\nอำเภอบางละมุง จังหวัดชลบุรี 20150" data-en="666/66 Moo 5, Na Kluea,\nBang Lamung, Chon Buri 20150, Thailand">666/66 หมู่ที่ 5 ตำบลนาเกลือ<br>อำเภอบางละมุง จังหวัดชลบุรี 20150</address><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=666%2F66%20%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%205%20%E0%B8%99%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD%20%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A5%E0%B8%B0%E0%B8%A1%E0%B8%B8%E0%B8%87%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%2020150" target="_blank" rel="noopener noreferrer"><span data-th="ค้นหาที่อยู่บน Google Maps" data-en="Search this address on Google Maps">ค้นหาที่อยู่บน Google Maps</span> ↗</a></div>
@@ -119,18 +118,18 @@
     <p class="dialog-signoff">A CONVERSATION CAN GO A LONG WAY.</p>
   </template>
   <template id="panel-social">
-    <span class="dialog-eyebrow">05 / STAY IN THE LOOP</span><h2 >Find Us On<span class="ink-spark">☺</span></h2>
+    <h2 >Find Us On<span class="ink-spark">☺</span></h2>
     <p class="dialog-lead" data-th="มาเชื่อมต่อกันอีกหน่อย" data-en="Let's stay connected.">มาเชื่อมต่อกันอีกหน่อย</p>
     <p data-th="ติดตามเรื่องราวและข่าวสารของ Go More Hub ผ่านช่องทาง Facebook ของเรา" data-en="Find Go More Hub on Facebook for our stories and updates.">ติดตามเรื่องราวและข่าวสารของ Go More Hub ผ่านช่องทาง Facebook ของเรา</p>
     <a class="social-link" href="https://www.facebook.com/gomorehub" target="_blank" rel="noopener noreferrer"><span class="facebook-letter" aria-hidden="true">f</span><span><strong>Go More Hub</strong><small>facebook.com/gomorehub</small></span><b aria-hidden="true">↗</b></a>
     <p class="dialog-signoff">GOOD THINGS ARE BETTER TOGETHER.</p>
   </template>
   <template id="panel-idea">
-    <span class="dialog-eyebrow">A LITTLE REMINDER</span><h2 >Make room<br>for more<span class="ink-spark">☺</span></h2>
+    <h2 >Make room<br>for more<span class="ink-spark">☺</span></h2>
     <p class="dialog-lead idea-message" data-th="พักสักนิด แล้วออกไปทำสิ่งที่ทำให้คุณยิ้ม" data-en="Take a little break. Make time for something that makes you smile.">พักสักนิด แล้วออกไปทำสิ่งที่ทำให้คุณยิ้ม</p>
     <p data-th="บางครั้ง สิ่งดี ๆ เริ่มจากการก้าวออกไปข้างนอก เปลี่ยนบรรยากาศ หรือขยับตัวอีกนิด" data-en="Sometimes the good stuff starts with getting outside, changing your view, or moving a little more.">บางครั้ง สิ่งดี ๆ เริ่มจากการก้าวออกไปข้างนอก เปลี่ยนบรรยากาศ หรือขยับตัวอีกนิด</p>
     <button class="dialog-cta" id="another-idea"><span data-th="อีกหนึ่งไอเดียดี ๆ" data-en="One more good idea">อีกหนึ่งไอเดียดี ๆ</span><span aria-hidden="true">↻</span></button>
   </template>
-  <noscript><div class="noscript-note"><p>Go More Hub — บริษัท โก มอร์ ฮับ จำกัด<br>666/66 หมู่ที่ 5 ตำบลนาเกลือ อำเภอบางละมุง จังหวัดชลบุรี 20150</p><a href="mailto:support@villadd.com">support@villadd.com</a> · <a href="https://www.facebook.com/gomorehub">Facebook</a> · <a href="https://villadd.com/th">Villadd</a> · <a href="https://nidss.github.io/thm2/">ThaiMove (Coming Soon)</a><p>เปิด JavaScript เพื่อสำรวจฉากและเมนูทั้งหมด / Enable JavaScript to explore this scene.</p></div></noscript>
+  <noscript><div class="noscript-note"><p>Go More Hub — บริษัท โก มอร์ ฮับ จำกัด<br>666/66 หมู่ที่ 5 ตำบลนาเกลือ อำเภอบางละมุง จังหวัดชลบุรี 20150</p><a href="mailto:support@villadd.com">support@villadd.com</a> · <a href="https://www.facebook.com/gomorehub">Facebook</a> · <a href="https://villadd.com/th">Villadd</a> · ThaiMove (Coming Soon)<p>เปิด JavaScript เพื่อสำรวจฉากและเมนูทั้งหมด / Enable JavaScript to explore this scene.</p></div></noscript>
 </body>
 </html>
