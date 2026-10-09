@@ -17,18 +17,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="script.js?v=17" defer></script>
+  <script src="script.js?v=18" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#explore" data-th="ข้ามไปยังเมนูสำรวจ" data-en="Skip to explore menu">ข้ามไปยังเมนูสำรวจ</a>
+  <a class="skip-link" href="#explore" data-th="ข้ามไปยังเมนู" data-en="Skip to menu">ข้ามไปยังเมนู</a>
   <header class="site-header">
     <a class="site-name" href="./" aria-label="Go More Hub home">GO MORE HUB<span class="header-dot"></span></a>
     <span class="header-caption" data-th="โลกเล็ก ๆ ของความเป็นไปได้" data-en="A LITTLE WORLD OF POSSIBILITIES">โลกเล็ก ๆ ของความเป็นไปได้</span>
     <div class="header-actions">
-      <nav class="explore-menu" id="explore" tabindex="-1" aria-label="เมนูสำรวจ Go More Hub">
-        <button id="explore-toggle" aria-expanded="false" aria-controls="explore-list"><span class="menu-symbol" aria-hidden="true">✳</span><span data-th="สำรวจ" data-en="Explore">สำรวจ</span><span class="menu-chevron" aria-hidden="true">⌃</span></button>
+      <nav class="explore-menu" id="explore" tabindex="-1" aria-label="เมนู Go More Hub">
+        <button id="explore-toggle" aria-expanded="false" aria-controls="explore-list"><span data-th="เมนู" data-en="Menu">เมนู</span><span class="menu-chevron" aria-hidden="true">⌃</span></button>
         <div id="explore-list" hidden>
           <span class="menu-title">FIND YOUR NEXT MORE</span>
           <button data-open="about">About Us <span>01</span></button>
@@ -39,16 +39,17 @@
         </div>
       </nav>
       <button id="motion-toggle" aria-pressed="false"><span class="motion-icon" aria-hidden="true">Ⅱ</span><span class="motion-label" data-th="พัก motion" data-en="Pause motion">พัก motion</span></button>
+      <button id="sound-toggle" aria-pressed="false" aria-label="เสียงบรรยากาศ" title="เปิดเสียง"><svg class="sound-icon icon-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg><svg class="sound-icon icon-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg></button>
       <button class="language-button" id="language-toggle" aria-label="Switch language to English">TH <span>/ EN</span></button>
     </div>
   </header>
   <main class="world-shell" id="main">
     <h1 class="sr-only">Go More Hub — Go more. Live more.</h1>
-    <p class="mobile-hint" data-th="เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มสำรวจเพื่อเปิดเมนู" data-en="Swipe across the scene, or tap Explore to find your way.">เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มสำรวจเพื่อเปิดเมนู</p>
+    <p class="mobile-hint" data-th="เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มเมนู" data-en="Swipe across the scene, or tap Menu to find your way.">เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มเมนู</p>
     <div class="scene-viewport" id="scene-viewport" tabindex="0" aria-label="ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้">
       <div class="world" id="world">
-        <img class="world-extension extension-top" src="assets/desk-extension-top.webp" width="2926" height="536" alt="" decoding="async">
-        <img class="world-extension extension-bottom" src="assets/desk-extension-bottom.webp" width="2926" height="216" alt="" decoding="async">
+        <img class="world-extension extension-top" src="assets/desk-extension-top.webp" width="2926" height="584" alt="" decoding="async">
+        <img class="world-extension extension-bottom" src="assets/desk-extension-bottom.webp" width="2926" height="264" alt="" decoding="async">
         <img class="world-background" id="world-background" src="assets/desk-panorama.webp" width="2926" height="1081" alt="" fetchpriority="high">
         <canvas class="sea-canvas" id="sea-canvas" aria-hidden="true"></canvas>
         <div class="world-layer">

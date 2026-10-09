@@ -35,12 +35,13 @@
     languageButton.setAttribute('aria-label', next === 'th' ? 'Switch language to English' : 'เปลี่ยนเป็นภาษาไทย');
     closeButton.setAttribute('aria-label', next === 'th' ? 'ปิดหน้าต่าง' : 'Close dialog');
     viewport.setAttribute('aria-label', next === 'th' ? 'ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้' : 'Go More Hub scene. Scroll to explore.');
-    document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนูสำรวจ Go More Hub' : 'Explore Go More Hub');
+    document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนู Go More Hub' : 'Go More Hub menu');
     document.querySelector('.supplied-phone').setAttribute('aria-label', next === 'th' ? 'ติดต่อ Go More Hub' : 'Contact Go More Hub');
     document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'Villadd — จองที่พักพูลวิลล่า' : 'Villadd — Pool villa booking');
     document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
     document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove — เร็ว ๆ นี้' : 'ThaiMove — Coming Soon');
     motionLabels();
+    soundLabels();
     updateCues();
     writePreference('gmh-language', next);
   }
@@ -253,6 +254,68 @@
       .then(() => glide(centreOf(STOPS[2]), 1500))
       .then(() => glide(centreOf(STOPS[1]), 850));
   }
+  // Ambient beach sound: off until the visitor turns it on. Web Audio keeps the loop gapless and fades it in and out.
+  const soundButton = document.querySelector('#sound-toggle');
+  const SOUND_VOLUME = .55;
+  let soundOn = readPreference('gmh-sound') === 'on';
+  let audio = null;
+  function soundLabels() {
+    soundButton.setAttribute('aria-pressed', String(soundOn));
+    soundButton.setAttribute('aria-label', language === 'th' ? 'เสียงบรรยากาศ' : 'Ambient sound');
+    soundButton.title = soundOn ? (language === 'th' ? 'ปิดเสียง' : 'Mute sound') : (language === 'th' ? 'เปิดเสียง' : 'Play sound');
+  }
+  function createAudio() {
+    const Context = window.AudioContext || window.webkitAudioContext;
+    if (!Context) return null;
+    const context = new Context();
+    const gain = context.createGain();
+    gain.gain.value = 0;
+    gain.connect(context.destination);
+    const ready = fetch('assets/windy-beach.mp3')
+      .then(response => { if (!response.ok) throw new Error('Sound unavailable'); return response.arrayBuffer(); })
+      .then(data => new Promise((resolve, reject) => context.decodeAudioData(data, resolve, reject)))
+      .then(buffer => {
+        const source = context.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        source.connect(gain);
+        source.start();
+      });
+    return { context, gain, ready };
+  }
+  function syncSound() {
+    if (!audio) return;
+    const audible = soundOn && !document.hidden;
+    const level = audio.gain.gain, now = audio.context.currentTime;
+    level.cancelScheduledValues(now);
+    level.setValueAtTime(level.value, now);
+    level.linearRampToValueAtTime(audible ? SOUND_VOLUME : 0, now + (audible ? 1.6 : .4));
+    if (audible) audio.context.resume();
+    else setTimeout(() => { if (audio && !(soundOn && !document.hidden)) audio.context.suspend(); }, 450);
+  }
+  function setSound(value) {
+    soundOn = value;
+    // The audio context must be created inside the visitor's gesture for browsers to allow playback.
+    if (soundOn && !audio) {
+      audio = createAudio();
+      audio?.ready.catch(() => { audio = null; soundOn = false; soundLabels(); });
+      if (!audio) soundOn = false;
+    }
+    soundLabels();
+    syncSound();
+  }
+  // Browsers block sound until a gesture, so a saved "on" preference starts on the first tap, click or key press.
+  const resumeEvents = ['click', 'keydown', 'touchend'];
+  function resumeSound(event) {
+    resumeEvents.forEach(type => document.removeEventListener(type, resumeSound, true));
+    if (soundOn && !audio && !soundButton.contains(event.target)) setSound(true);
+  }
+  if (soundOn) resumeEvents.forEach(type => document.addEventListener(type, resumeSound, true));
+  soundButton.addEventListener('click', () => {
+    setSound(!soundOn);
+    writePreference('gmh-sound', soundOn ? 'on' : 'off');
+  });
+  document.addEventListener('visibilitychange', syncSound);
   ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(type => viewport.addEventListener(type, stopGlide, { passive:true }));
   viewport.addEventListener('scroll', () => { if (!cueFrame) cueFrame = requestAnimationFrame(updateCues); }, { passive:true });
   cues.forEach(cue => cue.addEventListener('click', () => glide(centreOf(STOPS[Number(cue.dataset.stop)]), 700)));

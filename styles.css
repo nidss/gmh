@@ -82,8 +82,15 @@
 .world-extension{display:none;position:absolute;left:0;width:100%;max-width:none;height:auto;z-index:2;pointer-events:none}
 .camera-ready .world-extension{display:block}
 .camera-ready .world{overflow:visible}
-.extension-top{bottom:calc(100% - 1.4801%)}
-.extension-bottom{top:calc(100% - 1.4801%)}
+.extension-top{bottom:calc(100% - 5.9204%)}
+.extension-bottom{top:calc(100% - 5.9204%)}
 .header-actions>*,.site-name{white-space:nowrap}
 @media(max-width:700px){.site-header{gap:8px}.menu-chevron{display:none}.explore-menu>#explore-toggle{padding:8px 11px;gap:6px}.language-button{padding:8px 10px}}
 @media(max-width:360px){.site-name{letter-spacing:.6px;padding:8px 9px}}
+/* Sound toggle: Lucide volume-2 when playing, volume-x when muted. */
+#sound-toggle{display:grid;place-items:center;padding:7px 11px;min-height:33px;border-radius:30px;background:#fff9ebcc;box-shadow:0 3px 12px #57381510}
+.sound-icon{width:16px;height:16px;grid-area:1/1}
+#sound-toggle[aria-pressed=false] .icon-on,#sound-toggle[aria-pressed=true] .icon-off{display:none}
+#sound-toggle[aria-pressed=true]{color:var(--purple)}
+@media(max-width:700px){#sound-toggle{min-height:44px;min-width:44px}}
+@media(max-width:360px){.header-actions{gap:4px}.header-dot{display:none}.site-name{font-size:9px;letter-spacing:.4px;padding:8px}.explore-menu>#explore-toggle{padding:8px 9px}#motion-toggle,#sound-toggle{padding:8px 6px;min-width:40px}.language-button{padding:8px 7px}}
