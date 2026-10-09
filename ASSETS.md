@@ -5,7 +5,7 @@
 - assets/phone-sunset-v2.webp: supplied b72e378f phone and shadow, preserved directly.
 - assets/about-note-v2.webp: supplied 48f2a169 About Us paper, preserved directly.
 - assets/contact-note-v2.webp: supplied 65efa42b Contact Us paper, preserved directly.
-- assets/villadd-frame-v2.webp: supplied daa7cb18 wooden frame, with the Villadd cover inserted using built-in ImageGen.
+- assets/villadd-frame-supplied-v3.webp: latest supplied codex-clipboard-900564ff-da66-4798-880f-101111a624bc.png, 2688 × 2988, exported losslessly with original frame, Villadd artwork, transparency and painted shadow unchanged. Supersedes the generated frame derivative.
 - assets/villadd-note-v2.webp: supplied ae0accba paper with only the wording changed to VillaDD, as corrected by the user, using built-in ImageGen.
 
 All exported to WebP quality 95 with transparency. New phone and frame proportions are retained and their bases align with the desk. No CSS ground shadows are added. The supplied notes retain their baked-in lettering, texture and decoration. Exact edit prompts: assets/latest-scene-edit-prompts.md. The sections below document earlier retained assets.
