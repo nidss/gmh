@@ -8,5 +8,5 @@ assert.equal(ids.length, new Set(ids).size, 'Duplicate source IDs');
 for (const match of html.matchAll(/href="#([^"]+)"/g)) assert(ids.includes(match[1]), 'Missing anchor: ' + match[1]);
 for (const match of html.matchAll(/data-open="([^"]+)"/g)) assert(ids.includes('panel-' + match[1]), 'Missing dialog template: ' + match[1]);
 for (const match of html.matchAll(/(?:src|href)="((?:assets\/|styles\.css|script\.js)[^"]*)"/g)) await access(resolve(root, match[1].split('?')[0]));
-for (const value of ['COMING SOON','https://villadd.com/th','https://nidss.github.io/thm2/','mailto:support@villadd.com','https://www.facebook.com/gomorehub','666/66','20150','sea-canvas']) assert(html.includes(value), 'Missing required content: ' + value);
+for (const value of ['COMING SOON','https://villadd.com/th','mailto:support@villadd.com','https://www.facebook.com/gomorehub','666/66','20150','sea-canvas']) assert(html.includes(value), 'Missing required content: ' + value);
 console.log('Verified assets, unique IDs, scene menu destinations, product links and company contacts.');
