@@ -7,7 +7,14 @@ The page uses the exact user-supplied phone and Villadd frame composites, export
 - assets/phone-supplied-shadow.webp — codex-clipboard-5bba8f73-0455-4de9-8629-281e287d4149.png, 1193 × 1181.
 - assets/frame-supplied-shadow.webp — codex-clipboard-09e3a258-0369-4b42-b805-a3567b59e1c4.png, 3058 × 3335.
 
-No generated or CSS ground shadows are applied to these objects. Contact Us and VillaDD are HTML sticky-note overlays; the original image pixels remain unchanged. The image offsets preserve the previous object positions while allowing the supplied shadow canvases to extend toward the desk edge. Earlier generated derivatives below are retained as historical sources.
+No generated or CSS ground shadows are applied to these objects. Contact Us and VillaDD are transparent raster sticky-note overlays with thick handwritten marker lettering, paper grain and curled corners, generated with built-in ImageGen from the user’s close-up reference. The original phone, frame and shadow pixels remain unchanged. The image offsets preserve the previous object positions while allowing the supplied shadow canvases to extend toward the desk edge. Earlier generated derivatives below are retained as historical sources.
+
+## Realistic paper labels
+
+- assets/contact-paper-note.webp — Contact Us on two lines.
+- assets/villadd-paper-note.webp — VillaDD on one line.
+
+Both are generated transparent PNGs exported to WebP quality 95. Reference: codex-clipboard-02d5bc16-4c24-43ad-bf0b-a1cd7a3f7926.png. Typography is baked into the artwork, not a web font.
 
 ## Supplied source artwork
 

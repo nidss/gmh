@@ -36,7 +36,7 @@
 /* Supplied cutouts include their own shadows. Offsets align the objects while allowing the original shadow canvas to extend toward the foreground. */
 .supplied-phone .object-image{left:-25.16%;top:-.30%;width:125.16%;height:124.41%}
 .supplied-frame .object-image{left:-21.93%;top:0;width:121.93%;height:132.98%}
-.desk-sticky{position:absolute;display:grid;place-content:center;text-align:center;background:linear-gradient(165deg,#fff0ad,#ffe394 78%,#f3ce73);color:#302418;font-family:'Patrick Hand',cursive;line-height:1.02;box-shadow:-.10cqw .18cqw .15cqw #54361855;pointer-events:none}
-.phone-sticky{left:32%;top:59%;width:27%;aspect-ratio:1;font-size:1.17cqw;transform:rotate(15deg);border-radius:0 0 .2cqw 0}
-.frame-sticky{right:0;top:5.7%;width:37%;aspect-ratio:1.65;font-size:1.3cqw;transform:rotate(10deg);border-radius:0 0 .2cqw 0}
+.desk-sticky{position:absolute;display:block;height:auto;pointer-events:none;filter:drop-shadow(-.05cqw .09cqw .06cqw #54361844)}
+.phone-sticky{left:28.5%;top:55%;width:34%}
+.frame-sticky{right:-.5%;top:3%;width:32%}
 .supplied-phone .object-caption{display:none}
