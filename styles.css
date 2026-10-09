@@ -16,10 +16,10 @@
 .supplied-phone{left:24.3%;top:85.3%;width:16.7%;aspect-ratio:1}
 .supplied-phone .object-image{filter:brightness(.98) saturate(.96) drop-shadow(-.28cqw .28cqw .14cqw #3c210b70) drop-shadow(-.85cqw .44cqw .38cqw #49270c35)}
 .supplied-phone:before,.supplied-frame:before{content:'';position:absolute;z-index:-1;pointer-events:none;border-radius:50%;background:#47240a;filter:blur(.4cqw);opacity:.35;transform:skewX(-30deg)}
-.supplied-phone:before{left:-11%;top:83.5%;width:103%;height:7%}
+.supplied-phone:before{left:9%;top:85.4%;width:87%;height:2.8%;filter:blur(.12cqw);opacity:.62}
 .supplied-frame{left:85.389%;top:83.933%;width:16.194%;aspect-ratio:.96236}
 .supplied-frame .object-image{filter:brightness(.96) saturate(.95) drop-shadow(-.34cqw .2cqw .13cqw #42220965) drop-shadow(-.7cqw .32cqw .4cqw #3f230b35)}
-.supplied-frame:before{left:-12%;top:89.5%;width:103%;height:7%;opacity:.3}
+.supplied-frame:before{left:1%;top:91.1%;width:87%;height:2.8%;filter:blur(.12cqw);opacity:.65}
 .object-caption{position:absolute;left:50%;bottom:10%;transform:translate(-50%,4px);width:max-content;max-width:200%;padding:.45cqw .8cqw;border-radius:2cqw;background:#fff3dce8;border:1px solid #e5c99799;box-shadow:0 2px 7px #44270e22;font-size:.72cqw;letter-spacing:.01cqw;color:#493519;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .supplied-note .object-caption{bottom:-5%}
 .supplied-frame .object-caption{bottom:13%}
@@ -38,9 +38,10 @@
 /* Keep floating controls clear of the reference objects. */
 @media(min-width:701px){.scene-instruction{display:none}.explore-menu{right:auto;left:50%;transform:translateX(-50%)}.site-footer #motion-toggle{position:fixed;left:calc(50% + 68px);bottom:14px}}
 
-/* Ground projections follow the sunset: from upper right toward lower left. */
+/* Long cast shadows stay attached to the bases and follow the sunset toward the foreground left.
+   The transparent brown preserves the desk grain; only the distant end softens. */
 .supplied-phone .object-image{filter:drop-shadow(-.15cqw .1cqw .1cqw #40210855)}
-.supplied-phone:after,.supplied-frame:after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to bottom,#3d210b00 8%,#3d210b50 24%,#3d210b80 55%,#3d210ba0 88%);mask-repeat:no-repeat;mask-position:center;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;filter:blur(.40cqw);opacity:.48}
-.supplied-phone:after{mask-image:url('assets/rotary-phone-contact.webp');-webkit-mask-image:url('assets/rotary-phone-contact.webp');transform-origin:50% 86.8%;transform:matrix(1,0,.9,-.30,0,0)}
-.supplied-frame:after{mask-image:url('assets/picture-frame-villadd.webp');-webkit-mask-image:url('assets/picture-frame-villadd.webp');transform-origin:50% 92.3%;transform:matrix(1,0,.9,-.27,0,0);opacity:.40}
+.supplied-phone:after,.supplied-frame:after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to bottom,#4a2c197d 10%,#4a2c19b8 70%,#38200ed4 95%);mask-repeat:no-repeat;mask-position:center;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;filter:blur(.13cqw);opacity:1}
+.supplied-phone:after{mask-image:url('assets/rotary-phone-contact.webp');-webkit-mask-image:url('assets/rotary-phone-contact.webp');transform-origin:50% 86.8%;transform:matrix(1,0,1,-.62,0,0)}
+.supplied-frame:after{mask-image:url('assets/picture-frame-villadd.webp');-webkit-mask-image:url('assets/picture-frame-villadd.webp');transform-origin:50% 92.3%;transform:matrix(1,0,1,-.62,0,0)}
 .supplied-phone .object-caption{display:none}

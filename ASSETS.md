@@ -28,7 +28,7 @@ Preserve the wooden border, white mat, original proportions, material, overall s
 
 Edited from the supplied phone.png using the built-in ImageGen tool, preserving its square composition, shape, cord and transparent background. The edit adds a yellow Contact Us post-it on the front left, with warm highlights from the upper right. Dimensions: 1254 × 1254. WebP quality 95. The original telephone export is retained separately.
 
-CSS projects the phone and frame silhouettes onto the desk toward the lower left, using soft alpha masks with darker contact shadows at the base.
+CSS projects the phone and frame silhouettes from their bases toward the foreground left, following the supplied long-shadow references. Both use the same projected light direction, translucent warm brown to retain the wood grain, a lightly softened edge and narrow darker contact shadows. The shadows continue to the edge of the desk rather than fading away immediately below the objects.
 
 Final edit prompt:
 
