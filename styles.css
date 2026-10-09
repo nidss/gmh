@@ -42,6 +42,6 @@
    The transparent brown preserves the desk grain; only the distant end softens. */
 .supplied-phone .object-image{filter:drop-shadow(-.15cqw .1cqw .1cqw #40210855)}
 .supplied-phone:after,.supplied-frame:after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to bottom,#4a2c197d 10%,#4a2c19b8 70%,#38200ed4 95%);mask-repeat:no-repeat;mask-position:center;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;filter:blur(.13cqw);opacity:1}
-.supplied-phone:after{mask-image:url('assets/rotary-phone-contact.webp');-webkit-mask-image:url('assets/rotary-phone-contact.webp');transform-origin:50% 86.8%;transform:matrix(1,0,1,-.62,0,0)}
-.supplied-frame:after{mask-image:url('assets/picture-frame-villadd.webp');-webkit-mask-image:url('assets/picture-frame-villadd.webp');transform-origin:50% 92.3%;transform:matrix(1,0,1,-.62,0,0)}
+.supplied-phone:after{clip-path:polygon(5% 62%,7% 42%,15% 29%,28% 20%,48% 16%,72% 17%,89% 25%,96% 40%,98% 89%,8% 89%);transform-origin:50% 86.8%;transform:matrix(1,0,1,-.62,0,0)}
+.supplied-frame:after{clip-path:polygon(11% 9%,90% 7%,97% 94%,3% 94%);transform-origin:50% 92.3%;transform:matrix(1,0,1,-.62,0,0)}
 .supplied-phone .object-caption{display:none}
