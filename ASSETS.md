@@ -89,7 +89,7 @@ Copied unchanged from the user's PNG files, preserving transparency and original
 
 ### assets/desk-extension-top.webp, assets/desk-extension-bottom.webp
 
-Cut from the supplied outpaint assets/gmhbg3.png (2926 × 1801), which continues desk-panorama.webp upward (transom window, curtain rail) and downward (desk front). The original panorama sits unchanged at y = 520; only the added areas are kept: top 2926 × 584 and bottom 2926 × 264, each overlapping the original by 64 px with a feathered alpha edge that follows the outpaint's own blend. WebP quality 84.
+Cut from the supplied outpaint gmhbg3.png (2926 × 1801; removed from the repository after cutting, still available in commit 6299b5b), which continues desk-panorama.webp upward (transom window, curtain rail) and downward (desk front). The original panorama sits unchanged at y = 520; only the added areas are kept: top 2926 × 584 and bottom 2926 × 264, each overlapping the original by 64 px with a feathered alpha edge that follows the outpaint's own blend. WebP quality 84.
 
 ## Sound
 
