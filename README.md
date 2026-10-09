@@ -2,7 +2,7 @@
 
 Public company landing page: **https://nidss.github.io/gmh/**
 
-An interactive seaside desk using the company-supplied sunset background, picture frame, rotary telephone and post-it artwork. The ocean stays animated, with official brand logos in the information panels. Built with semantic HTML, CSS and JavaScript. No build step or runtime dependencies.
+An interactive panoramic seaside desk using the supplied background, Villadd frame, rotary telephone, About Us note and ThaiMove wooden figure, positioned against draft-ref.png. The ocean stays animated, with official brand logos in the information panels. Built with semantic HTML, CSS and JavaScript. No build step or runtime dependencies.
 
 ## Local preview
 
@@ -21,10 +21,10 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 
 - The supplied post-it at the left window frame opens About Us.
 - The rotary phone on the left has a yellow Contact Us post-it and opens the contact panel. Its image is edited from the supplied phone with sunset lighting.
-- The supplied picture frame on the right opens the product collection, including Villadd and ThaiMove (Coming Soon).
+- The supplied picture frame on the right opens Villadd. The wooden figure opens ThaiMove (Coming Soon).
 - The Explore menu also gives direct access to every section and Find Us On.
-- The three objects follow the supplied placement reference. The phone and frame use the supplied images including their painted shadows, with realistic paper Contact Us and VillaDD sticky-note artwork.
-- The frame contains the supplied Villadd cover. Its orientation is baked into the asset to match the placement reference while keeping the lettering readable.
+- All four objects follow measured coordinates from the 2926 × 1081 placement reference. The supplied cutouts include their labels; no separate sticky notes or synthetic ground shadows are added.
+- The panorama keeps its native aspect ratio and object proportions, with horizontal exploration on mobile.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.
 - Thai / English switch with optional local preference storage.

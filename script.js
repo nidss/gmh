@@ -37,8 +37,9 @@
     viewport.setAttribute('aria-label', next === 'th' ? 'ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้' : 'Go More Hub scene. Scroll to explore.');
     document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนูสำรวจ Go More Hub' : 'Explore Go More Hub');
     document.querySelector('.supplied-phone').setAttribute('aria-label', next === 'th' ? 'ติดต่อ Go More Hub' : 'Contact Go More Hub');
-    document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'สำรวจ Villadd และ ThaiMove — Coming Soon' : 'Explore Villadd and ThaiMove — Coming Soon');
+    document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'Villadd — จองที่พักพูลวิลล่า' : 'Villadd — Pool villa booking');
     document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
+    document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove — เร็ว ๆ นี้' : 'ThaiMove — Coming Soon');
     motionLabels();
     writePreference('gmh-language', next);
   }
@@ -154,13 +155,13 @@
         'precision mediump float; varying vec2 v_uv; uniform sampler2D u_image; uniform float u_time;',
         'void main(){',
         'vec2 p=vec2(v_uv.x,1.0-v_uv.y);',
-        'float edge=mix(0.535,0.704,clamp((p.x-0.30)/0.54,0.0,1.0));',
-        'float left=mix(0.47,0.29,clamp((p.y-0.415)/0.17,0.0,1.0)); float mask=smoothstep(left,left+0.018,p.x)*(1.0-smoothstep(0.828,0.842,p.x))*smoothstep(0.408,0.425,p.y)*(1.0-smoothstep(edge-0.025,edge,p.y));',
-        'vec2 offset=vec2(sin(p.y*210.0+u_time*0.7)+sin(p.x*120.0-u_time*0.45),sin(p.x*100.0+u_time*0.8))*vec2(0.0014,0.0011)*mask;',
+        'float edge=mix(0.535,0.704,clamp((p.x-0.368)/0.354,0.0,1.0));',
+        'float left=mix(0.479,0.361,clamp((p.y-0.415)/0.17,0.0,1.0)); float mask=smoothstep(left,left+0.012,p.x)*(1.0-smoothstep(0.714,0.724,p.x))*smoothstep(0.408,0.425,p.y)*(1.0-smoothstep(edge-0.025,edge,p.y));',
+        'vec2 offset=vec2(sin(p.y*210.0+u_time*0.7)+sin(p.x*120.0-u_time*0.45),sin(p.x*100.0+u_time*0.8))*vec2(0.00092,0.0011)*mask;',
         'vec3 color=texture2D(u_image,vec2(p.x+offset.x,1.0-p.y-offset.y)).rgb;',
         'float ripple=pow(max(0.0,sin(p.y*520.0+sin(p.x*85.0-u_time*0.6)*1.4-u_time*1.1)),10.0);',
         'float sparkle=pow(max(0.0,sin(p.x*710.0+u_time*0.5)),5.0);',
-        'float reflection=exp(-pow((p.x-0.795)/0.052,2.0));',
+        'float reflection=exp(-pow((p.x-0.692)/0.034,2.0));',
         'color+=vec3(0.055,0.045,0.026)*ripple*sparkle*reflection*mask;',
         'gl_FragColor=vec4(color,1.0);}'
       ].join('\n');
@@ -220,17 +221,17 @@
         context.drawImage(image,0,0,w,h);
         context.save();
         context.beginPath();
-        context.moveTo(w*.47,h*.415);
-        context.lineTo(w*.833,h*.415);
-        context.lineTo(w*.833,h*.689);
-        context.lineTo(w*.31,h*.535);
-        context.lineTo(w*.42,h*.47);
+        context.moveTo(w*.479,h*.415);
+        context.lineTo(w*.718,h*.415);
+        context.lineTo(w*.718,h*.689);
+        context.lineTo(w*.374,h*.535);
+        context.lineTo(w*.446,h*.47);
         context.closePath();
         context.clip();
         const sourceW = image.naturalWidth, sourceH = image.naturalHeight;
         for (let y=.415; y<.704; y+=.003) {
           const fade = Math.sin(Math.min(1,(y-.415)/.289)*Math.PI);
-          const shift = Math.sin(y*210+time*.7)*w*.0013*fade;
+          const shift = Math.sin(y*210+time*.7)*w*.00085*fade;
           context.drawImage(image,0,y*sourceH,sourceW,.003*sourceH,shift,y*h,w,.003*h+1);
         }
         context.restore();
@@ -246,7 +247,7 @@
     }
     ocean = {
       resize() {
-        canvas.width = Math.round(Math.min(1500,Math.max(900,world.clientWidth * Math.min(devicePixelRatio,1.5))));
+        canvas.width = Math.round(Math.min(2926,Math.max(900,world.clientWidth * Math.min(devicePixelRatio,1.5))));
         canvas.height = Math.round(canvas.width * image.naturalHeight / image.naturalWidth);
         render(time);
       },

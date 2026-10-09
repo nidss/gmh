@@ -1,5 +1,17 @@
 # Visual assets
 
+## Active panorama — exact supplied composition
+
+All five active raster assets are lossless WebP exports of the supplied files, retaining existing lettering, tape, materials and alpha. No ImageGen, replacement text, additional ground shadows or color filters were used for this revision.
+
+- desk-panorama.webp: gmhbg2.png, 2926 × 1081.
+- desk-phone.webp: clipboard 2c769d18, 2000 × 2000, Contact Us already attached.
+- desk-villadd.webp: clipboard 5b94a345, 2000 × 1632, cover and VillaDD label already attached.
+- desk-about.webp: clipboard 25bb3aad, 1000 × 1000, taped About Us note.
+- desk-thaimove.webp: clipboard f4ecfba0, 2000 × 2075, wooden figure with ThaiMove Coming Soon label.
+
+Geometry was measured by registering each cutout against draft-ref.png at its native 2926 × 1081 resolution. assets/scene-layout.json records the positions and dimensions. CSS uses those normalized coordinates on a fixed aspect-ratio canvas; small screens pan the same composition. Ocean displacement is recalibrated to the narrower window. Pausing motion reveals the unmodified source background. Earlier sections below describe retained historical assets.
+
 ## Active scene artwork — latest user-supplied set
 
 - assets/phone-sunset-v2.webp: supplied b72e378f phone and shadow, preserved directly.
