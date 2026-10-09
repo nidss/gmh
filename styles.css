@@ -14,12 +14,7 @@
 .supplied-note{left:21.8%;top:41.2%;width:8.2%;aspect-ratio:1}
 .supplied-note .object-image{filter:brightness(.98) saturate(.97) drop-shadow(-.12cqw .16cqw .08cqw #57310d60) drop-shadow(-.25cqw .35cqw .18cqw #50300d2a)}
 .supplied-phone{left:24.3%;top:85.3%;width:16.7%;aspect-ratio:1}
-.supplied-phone .object-image{filter:brightness(.98) saturate(.96) drop-shadow(-.28cqw .28cqw .14cqw #3c210b70) drop-shadow(-.85cqw .44cqw .38cqw #49270c35)}
-.supplied-phone:before,.supplied-frame:before{content:'';position:absolute;z-index:-1;pointer-events:none;border-radius:50%;background:#47240a;filter:blur(.4cqw);opacity:.35;transform:skewX(-30deg)}
-.supplied-phone:before{left:9%;top:85.4%;width:87%;height:2.8%;filter:blur(.12cqw);opacity:.62}
 .supplied-frame{left:85.389%;top:83.933%;width:16.194%;aspect-ratio:.96236}
-.supplied-frame .object-image{filter:brightness(.96) saturate(.95) drop-shadow(-.34cqw .2cqw .13cqw #42220965) drop-shadow(-.7cqw .32cqw .4cqw #3f230b35)}
-.supplied-frame:before{left:1%;top:91.1%;width:87%;height:2.8%;filter:blur(.12cqw);opacity:.65}
 .object-caption{position:absolute;left:50%;bottom:10%;transform:translate(-50%,4px);width:max-content;max-width:200%;padding:.45cqw .8cqw;border-radius:2cqw;background:#fff3dce8;border:1px solid #e5c99799;box-shadow:0 2px 7px #44270e22;font-size:.72cqw;letter-spacing:.01cqw;color:#493519;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .supplied-note .object-caption{bottom:-5%}
 .supplied-frame .object-caption{bottom:13%}
@@ -38,10 +33,10 @@
 /* Keep floating controls clear of the reference objects. */
 @media(min-width:701px){.scene-instruction{display:none}.explore-menu{right:auto;left:50%;transform:translateX(-50%)}.site-footer #motion-toggle{position:fixed;left:calc(50% + 68px);bottom:14px}}
 
-/* Long cast shadows stay attached to the bases and follow the sunset toward the foreground left.
-   The transparent brown preserves the desk grain; only the distant end softens. */
-.supplied-phone .object-image{filter:drop-shadow(-.15cqw .1cqw .1cqw #40210855)}
-.supplied-phone:after,.supplied-frame:after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to bottom,#4a2c197d 10%,#4a2c19b8 70%,#38200ed4 95%);mask-repeat:no-repeat;mask-position:center;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;filter:blur(.13cqw);opacity:1}
-.supplied-phone:after{clip-path:polygon(5% 62%,7% 42%,15% 29%,28% 20%,48% 16%,72% 17%,89% 25%,96% 40%,98% 95%,8% 89%);transform-origin:50% 86.8%;transform:matrix(1,0,1,-.62,0,0)}
-.supplied-frame:after{clip-path:polygon(11% 9%,90% 7%,97% 94%,3% 100%);transform-origin:50% 92.3%;transform:matrix(1,0,1,-.62,0,0)}
+/* Supplied cutouts include their own shadows. Offsets align the objects while allowing the original shadow canvas to extend toward the foreground. */
+.supplied-phone .object-image{left:-25.16%;top:-.30%;width:125.16%;height:124.41%}
+.supplied-frame .object-image{left:-21.93%;top:0;width:121.93%;height:132.98%}
+.desk-sticky{position:absolute;display:grid;place-content:center;text-align:center;background:linear-gradient(165deg,#fff0ad,#ffe394 78%,#f3ce73);color:#302418;font-family:'Patrick Hand',cursive;line-height:1.02;box-shadow:-.10cqw .18cqw .15cqw #54361855;pointer-events:none}
+.phone-sticky{left:32%;top:59%;width:27%;aspect-ratio:1;font-size:1.17cqw;transform:rotate(15deg);border-radius:0 0 .2cqw 0}
+.frame-sticky{right:0;top:5.7%;width:37%;aspect-ratio:1.65;font-size:1.3cqw;transform:rotate(10deg);border-radius:0 0 .2cqw 0}
 .supplied-phone .object-caption{display:none}

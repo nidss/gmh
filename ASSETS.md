@@ -1,5 +1,14 @@
 # Visual assets
 
+## Current desk objects — supplied shadows
+
+The page uses the exact user-supplied phone and Villadd frame composites, exported losslessly to WebP with their original transparency and painted shadows preserved:
+
+- assets/phone-supplied-shadow.webp — codex-clipboard-5bba8f73-0455-4de9-8629-281e287d4149.png, 1193 × 1181.
+- assets/frame-supplied-shadow.webp — codex-clipboard-09e3a258-0369-4b42-b805-a3567b59e1c4.png, 3058 × 3335.
+
+No generated or CSS ground shadows are applied to these objects. Contact Us and VillaDD are HTML sticky-note overlays; the original image pixels remain unchanged. The image offsets preserve the previous object positions while allowing the supplied shadow canvases to extend toward the desk edge. Earlier generated derivatives below are retained as historical sources.
+
 ## Supplied source artwork
 
 These four source images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. The background and window note use these exports directly. The current telephone and frame use the edited derivatives documented below. The three scene objects remain independent clickable elements.
