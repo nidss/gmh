@@ -36,8 +36,9 @@
     closeButton.setAttribute('aria-label', next === 'th' ? 'ปิดหน้าต่าง' : 'Close dialog');
     viewport.setAttribute('aria-label', next === 'th' ? 'ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้' : 'Go More Hub scene. Scroll to explore.');
     document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนูสำรวจ Go More Hub' : 'Explore Go More Hub');
-    document.querySelector('.villa-card').setAttribute('aria-label', next === 'th' ? 'สำรวจ Villadd' : 'Explore Villadd');
-    document.querySelector('.move-card').setAttribute('aria-label', next === 'th' ? 'สำรวจ ThaiMove — Coming Soon' : 'Explore ThaiMove — Coming Soon');
+    document.querySelector('.supplied-phone').setAttribute('aria-label', next === 'th' ? 'ติดต่อ Go More Hub' : 'Contact Go More Hub');
+    document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'สำรวจ Villadd และ ThaiMove — Coming Soon' : 'Explore Villadd and ThaiMove — Coming Soon');
+    document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
     motionLabels();
     writePreference('gmh-language', next);
   }
@@ -124,20 +125,13 @@
     target.dataset.en = idea[1];
     target.textContent = idea[language === 'th' ? 0 : 1];
   }
-  world.addEventListener('pointermove', event => {
-    if (paused || reducedMotion.matches || event.pointerType !== 'mouse') return;
-    const bounds = world.getBoundingClientRect();
-    root.style.setProperty('--scene-x', ((event.clientX - bounds.left) / bounds.width - .5) * 3 + 'px');
-    root.style.setProperty('--scene-y', ((event.clientY - bounds.top) / bounds.height - .5) * 3 + 'px');
-  }, { passive:true });
-  world.addEventListener('pointerleave', () => {
-    root.style.setProperty('--scene-x', '0px');
-    root.style.setProperty('--scene-y', '0px');
-  });
   let wasMobile = false;
   function fitScene() {
     const mobile = matchMedia('(max-width:700px)').matches;
-    if (mobile && !wasMobile) viewport.scrollLeft = (world.clientWidth - viewport.clientWidth) / 2;
+    if (mobile && !wasMobile) {
+      viewport.scrollLeft = Math.max(0, world.clientWidth * .34 - viewport.clientWidth / 2);
+      viewport.scrollTop = Math.max(0, world.clientHeight - viewport.clientHeight);
+    }
     wasMobile = mobile;
     ocean?.resize();
   }
@@ -148,7 +142,7 @@
   setMotion(paused);
   fitScene();
 
-  // Animate only the water in the original illustration; the beach and window stay sharp.
+  // Animate only the water in the supplied background; the beach and window stay sharp.
   const image = document.querySelector('#world-background');
   const canvas = document.querySelector('#sea-canvas');
   function initializeOcean() {
@@ -160,13 +154,13 @@
         'precision mediump float; varying vec2 v_uv; uniform sampler2D u_image; uniform float u_time;',
         'void main(){',
         'vec2 p=vec2(v_uv.x,1.0-v_uv.y);',
-        'float edge=mix(0.535,0.455,clamp((p.x-0.25)/0.45,0.0,1.0));',
-        'float mask=smoothstep(0.228,0.25,p.x)*(1.0-smoothstep(0.68,0.72,p.x))*smoothstep(0.361,0.383,p.y)*(1.0-smoothstep(edge-0.026,edge,p.y));',
-        'vec2 offset=vec2(sin(p.y*210.0+u_time*0.7)+sin(p.x*120.0-u_time*0.45),sin(p.x*100.0+u_time*0.8))*vec2(0.0012,0.0009)*mask;',
+        'float edge=mix(0.535,0.704,clamp((p.x-0.30)/0.54,0.0,1.0));',
+        'float left=mix(0.47,0.29,clamp((p.y-0.415)/0.17,0.0,1.0)); float mask=smoothstep(left,left+0.018,p.x)*(1.0-smoothstep(0.828,0.842,p.x))*smoothstep(0.408,0.425,p.y)*(1.0-smoothstep(edge-0.025,edge,p.y));',
+        'vec2 offset=vec2(sin(p.y*210.0+u_time*0.7)+sin(p.x*120.0-u_time*0.45),sin(p.x*100.0+u_time*0.8))*vec2(0.0014,0.0011)*mask;',
         'vec3 color=texture2D(u_image,vec2(p.x+offset.x,1.0-p.y-offset.y)).rgb;',
         'float ripple=pow(max(0.0,sin(p.y*520.0+sin(p.x*85.0-u_time*0.6)*1.4-u_time*1.1)),10.0);',
         'float sparkle=pow(max(0.0,sin(p.x*710.0+u_time*0.5)),5.0);',
-        'float reflection=exp(-pow((p.x-0.315)/0.055,2.0));',
+        'float reflection=exp(-pow((p.x-0.795)/0.052,2.0));',
         'color+=vec3(0.055,0.045,0.026)*ripple*sparkle*reflection*mask;',
         'gl_FragColor=vec4(color,1.0);}'
       ].join('\n');
@@ -226,15 +220,16 @@
         context.drawImage(image,0,0,w,h);
         context.save();
         context.beginPath();
-        context.moveTo(w*.245,h*.365);
-        context.lineTo(w*.70,h*.365);
-        context.lineTo(w*.68,h*.456);
-        context.lineTo(w*.25,h*.532);
+        context.moveTo(w*.47,h*.415);
+        context.lineTo(w*.833,h*.415);
+        context.lineTo(w*.833,h*.689);
+        context.lineTo(w*.31,h*.535);
+        context.lineTo(w*.42,h*.47);
         context.closePath();
         context.clip();
         const sourceW = image.naturalWidth, sourceH = image.naturalHeight;
-        for (let y=.365; y<.535; y+=.003) {
-          const fade = Math.sin(Math.min(1,(y-.365)/.17)*Math.PI);
+        for (let y=.415; y<.704; y+=.003) {
+          const fade = Math.sin(Math.min(1,(y-.415)/.289)*Math.PI);
           const shift = Math.sin(y*210+time*.7)*w*.0013*fade;
           context.drawImage(image,0,y*sourceH,sourceW,.003*sourceH,shift,y*h,w,.003*h+1);
         }

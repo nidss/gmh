@@ -2,7 +2,7 @@
 
 Public company landing page: **https://nidss.github.io/gmh/**
 
-An interactive seaside desk with an open window, warm original artwork, animated ocean reflections, official brand logos and clickable paper notes. Built with semantic HTML, CSS and JavaScript. No build step or runtime dependencies.
+An interactive seaside desk using the company-supplied sunset background, picture frame, rotary telephone and post-it artwork. The ocean stays animated, with official brand logos in the information panels. Built with semantic HTML, CSS and JavaScript. No build step or runtime dependencies.
 
 ## Local preview
 
@@ -19,9 +19,12 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 
 ## Features
 
-- Click the window notes for About Us, Contact Us and Find Us On.
-- Explore Villadd on the smartphone at the left of the desk.
-- Discover ThaiMove on the notebook, clearly marked Coming Soon.
+- The supplied post-it at the left window frame opens About Us.
+- The supplied rotary phone on the left of the desk opens Contact Us.
+- The supplied picture frame on the right opens the product collection, including Villadd and ThaiMove (Coming Soon).
+- The Explore menu also gives direct access to every section and Find Us On.
+- The three objects follow the supplied placement reference. CSS adds warm tonal adjustments, contact shadows and soft shadows cast toward the lower left.
+- The frame is mirrored horizontally to match the reference.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.
 - Thai / English switch with optional local preference storage.

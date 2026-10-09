@@ -11,14 +11,14 @@
   <meta property="og:title" content="Go More Hub — A little world of possibilities">
   <meta property="og:description" content="Good escapes. Meaningful movement. Explore the Go More Hub world.">
   <meta property="og:url" content="https://nidss.github.io/gmh/">
-  <meta property="og:image" content="https://nidss.github.io/gmh/assets/hub-world.webp">
+  <meta property="og:image" content="https://nidss.github.io/gmh/assets/window-sunset.webp">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="assets/gomorehub-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
-  <script src="script.js?v=4" defer></script>
+  <link rel="stylesheet" href="styles.css?v=5">
+  <script src="script.js?v=5" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#explore" data-th="ข้ามไปยังเมนูสำรวจ" data-en="Skip to explore menu">ข้ามไปยังเมนูสำรวจ</a>
@@ -29,52 +29,25 @@
   </header>
   <main class="world-shell" id="main">
     <h1 class="sr-only">Go More Hub — Go more. Live more.</h1>
-    <p class="mobile-hint" data-th="เลื่อนภาพซ้าย–ขวา หรือกดสำรวจ เพื่อค้นพบสิ่งต่าง ๆ" data-en="Swipe across the scene, or tap Explore to find your way.">เลื่อนภาพซ้าย–ขวา หรือกดสำรวจ เพื่อค้นพบสิ่งต่าง ๆ</p>
+    <p class="mobile-hint" data-th="เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มสำรวจเพื่อเปิดเมนู" data-en="Swipe across the scene, or tap Explore to find your way.">เลื่อนภาพเพื่อสำรวจ หรือกดปุ่มสำรวจเพื่อเปิดเมนู</p>
     <div class="scene-viewport" id="scene-viewport" tabindex="0" aria-label="ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้">
       <div class="world" id="world">
-        <img class="world-background" id="world-background" src="assets/hub-world.webp?v=4" width="1586" height="992" alt="" fetchpriority="high">
+        <img class="world-background" id="world-background" src="assets/window-sunset.webp?v=5" width="1920" height="1080" alt="" fetchpriority="high">
         <canvas class="sea-canvas" id="sea-canvas" aria-hidden="true"></canvas>
         <div class="sunlight" aria-hidden="true"></div>
         <div class="world-layer">
-          <button class="scene-item about-note paper" data-open="about" aria-haspopup="dialog" style="--tilt:-7deg">
-            <span class="pin coral" aria-hidden="true"></span>
-            <span class="scribble-small">A LITTLE INTRO</span>
-            <span class="handwritten">About<br>us<span class="hand-arrow" aria-hidden="true">↗</span></span>
-            <span class="item-sub" data-th="มารู้จักกัน" data-en="MEET THE HUB">มารู้จักกัน</span>
+          <button class="scene-item supplied-note" data-open="about" aria-haspopup="dialog" aria-label="About Us" style="--tilt:0deg">
+            <img class="object-image" src="assets/good-things-note.webp" width="1254" height="1254" alt="">
+            <span class="object-caption">About Us ↗</span>
           </button>
-          <div class="scene-item main-poster paper" style="--tilt:2deg">
-            <span class="tape tape-left" aria-hidden="true"></span>
-            <span class="tape tape-right" aria-hidden="true"></span>
-            <img src="assets/gomorehub-logo.png" width="2200" height="2201" alt="Go More Hub">
-            <p class="poster-tagline">GO MORE. LIVE MORE.</p>
-            <p class="poster-caption" data-th="ไอเดียดี ๆ ที่พาชีวิตไปต่อ" data-en="GOOD IDEAS. REAL-LIFE IMPACT.">ไอเดียดี ๆ ที่พาชีวิตไปต่อ</p>
-          </div>
-          <button class="scene-item villa-card phone" data-open="villadd" aria-haspopup="dialog" aria-label="สำรวจ Villadd" style="--tilt:-12deg">
-            <span class="phone-speaker" aria-hidden="true"></span><span class="phone-screen"><img class="villa-logo" src="assets/villadd-logo.png" width="1543" height="447" alt="Villadd by Go More Hub"><span class="phone-greeting">YOUR NEXT<br>GETAWAY.</span><span class="photo-wrap"><img src="assets/villadd.webp" width="1536" height="1024" alt="ภาพแนวคิดพูลวิลล่าในแสงยามเย็น"></span><span class="phone-home" aria-hidden="true"></span></span><span class="phone-label">Villadd ↗</span>
+          <button class="scene-item supplied-phone" data-open="contact" aria-haspopup="dialog" aria-label="Contact Us" style="--tilt:0deg">
+            <img class="object-image" src="assets/rotary-phone.webp" width="1254" height="1254" alt="">
+            <span class="object-caption">Contact Us ↗</span>
           </button>
-          <button class="scene-item move-card notebook paper" data-open="thaimove" aria-haspopup="dialog" aria-label="สำรวจ ThaiMove — Coming Soon" style="--tilt:9deg">
-            <span class="pin mint" aria-hidden="true"></span>
-            <span class="coming-sticker">COMING SOON</span>
-            <span class="photo-wrap"><img src="assets/thaimove.webp" width="1536" height="1024" alt="ภาพแนวคิดรองเท้าวิ่งสีขาวและเขียว"></span>
-            <span class="move-brand"><img src="assets/thaimove-logo.png" width="1619" height="1340" alt="ThaiMove"><span>Move more.<br>Get more.</span></span>
+          <button class="scene-item supplied-frame" data-open="products" aria-haspopup="dialog" aria-label="Explore Villadd and ThaiMove" style="--tilt:0deg">
+            <img class="object-image" src="assets/picture-frame.webp" width="1254" height="1254" alt="">
+            <span class="object-caption" data-th="ผลิตภัณฑ์ของเรา ↗" data-en="Our products ↗">ผลิตภัณฑ์ของเรา ↗</span>
           </button>
-          <button class="scene-item contact-note paper" data-open="contact" aria-haspopup="dialog" style="--tilt:-10deg">
-            <span class="tape" aria-hidden="true"></span>
-            <span class="handwritten">Contact<br>us <span aria-hidden="true">↗</span></span>
-            <span class="item-sub" data-th="คุยกับเรา" data-en="SAY HELLO">คุยกับเรา</span>
-          </button>
-          <button class="scene-item social-note paper" data-open="social" aria-haspopup="dialog" style="--tilt:-3deg">
-            <span class="pin violet" aria-hidden="true"></span>
-            <span class="handwritten">Find us on <span aria-hidden="true">↗</span></span>
-            <span class="social-signature"><span class="facebook-letter" aria-hidden="true">f</span><span>GO MORE HUB</span></span>
-          </button>
-          <button class="scene-item idea-note" data-open="idea" aria-haspopup="dialog" style="--tilt:9deg">
-            <svg class="smiley" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="29" cy="32" r="3" fill="currentColor"/><circle cx="50" cy="32" r="3" fill="currentColor"/><path d="M24 46q16 23 33-2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-            <span>MAKE ROOM<br>FOR MORE.</span>
-          </button>
-          <div class="scene-item boarding-pass paper" style="--tilt:5deg" aria-hidden="true"><span>ONE WAY TO</span><strong>MORE ↗</strong><span class="ticket-line">ESCAPE / MOVE / REPEAT</span></div>
-          <svg class="paper-plane" viewBox="0 0 100 80" aria-hidden="true"><path d="M5 27L92 5 60 70 42 45z" fill="#f5edd8" stroke="#88807b" stroke-width="1.5"/><path d="M92 5L42 45 25 65 28 36z" fill="#d6c8e8" stroke="#88807b" stroke-width="1.5"/></svg>
-          <span class="handwriting-decoration" aria-hidden="true">there's always<br>a little more ☺</span>
         </div>
       </div>
     </div>
@@ -95,6 +68,13 @@
     <button class="dialog-close" aria-label="ปิดหน้าต่าง" autofocus>×</button>
     <div class="dialog-body" id="dialog-body"></div>
   </dialog>
+    <template id="panel-products">
+    <span class="dialog-eyebrow">THE GO MORE HUB COLLECTION</span><h2>Our Products<span class="ink-spark">↗</span></h2>
+    <p class="dialog-lead" data-th="ออกไปพักผ่อน แล้วกลับมาขยับตัว" data-en="Good escapes. Meaningful movement.">ออกไปพักผ่อน แล้วกลับมาขยับตัว</p>
+    <p data-th="รู้จักสองผลิตภัณฑ์จาก Go More Hub ที่ทำให้การพักผ่อนและการออกกำลังกายมีความหมายมากขึ้น" data-en="Meet two Go More Hub products built around getting away and getting moving.">รู้จักสองผลิตภัณฑ์จาก Go More Hub ที่ทำให้การพักผ่อนและการออกกำลังกายมีความหมายมากขึ้น</p>
+    <div class="product-switches"><button data-open="villadd"><img src="assets/villadd-logo.png" alt="Villadd" width="1543" height="447"><span data-th="จองที่พักพูลวิลล่า" data-en="POOL VILLA GETAWAYS">จองที่พักพูลวิลล่า</span><b aria-hidden="true">↗</b></button><button data-open="thaimove"><img src="assets/thaimove-logo.png" alt="ThaiMove" width="1619" height="1340"><span>COMING SOON</span><b aria-hidden="true">↗</b></button></div>
+    <p class="dialog-signoff">GO MORE. LIVE MORE.</p>
+  </template>
   <template id="panel-about">
     <div class="dialog-brand"><img src="assets/gomorehub-logo.png" alt="Go More Hub" width="2200" height="2201"></div>
     <span class="dialog-eyebrow">01 / THE HUB</span><h2 >About Us<span class="ink-spark">✳</span></h2>

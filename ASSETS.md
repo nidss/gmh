@@ -1,14 +1,15 @@
-# Original visual assets
+# Visual assets
 
-## Seaside scene — assets/hub-world.webp
+## Current scene — supplied artwork
 
-Original image generated using the built-in ImageGen tool. Exported at 1586 × 992 as WebP, quality 92. It is conceptual brand artwork, not a real office photograph.
+These four images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. No AI regeneration, cropping or retouching was used. Lighting and shadows are applied through CSS, so the three objects remain independent clickable elements.
 
-Prompt:
+- assets/window-sunset.webp — gmhbg.png, 1920 × 1080, background.
+- assets/picture-frame.webp — picframe.png, 1254 × 1254, right side of desk. Displayed mirrored horizontally, as in the placement reference.
+- assets/rotary-phone.webp — phone.png, 1254 × 1254, left side of desk.
+- assets/good-things-note.webp — postit.png, 1254 × 1254, left window edge.
 
-Use case: stylized-concept. Asset type: full-screen interactive website diorama background, wide 16:10 composition. Create an original, exquisite warm seaside creative desk beside a large OPEN wooden casement window. View directly toward the open window and desk, with slight elevation so desktop visible. Outside window is a peaceful beautiful tropical sandy beach and turquoise ocean, warm golden late afternoon light, distant pale blue horizon, a few palms at far side, soft white clouds, ocean view unobstructed in center. The open wooden window sits from x=16% to84%, y=5% to65%; two wooden window shutters swung outward to either side, natural honey wood and ivory plaster. Keep the center ocean opening from x=26% to74%, y=12% to60% completely unobstructed, no window grid or panes across this view. Warm pale oak desktop stretches across the bottom third, y=67% to100%. Desktop objects only at the outer edges: rightmost at x=90% y=80% a terracotta mug with pencils, paint brushes, scissors, rolled cream paper, small pastel peach pencil sharpener, ivory eraser; far left x=8% y=83% a small cup, a little stack of notebooks, brass paper clips. A few yellow sticky notes with NO writing tucked near window frame edges; just 2 small sheets, do not crowd frame. A tiny potted succulent at far right edge. Leave desk region x=15% to36%, y=68% to96% CLEAR for a real interactive smartphone to be added in HTML. Leave desk region x=39% to64%, y=66% to96% clear for an HTML brand card. Leave desk region x=70% to86%, y=67% to95% clear for an HTML notebook. Sunlight streams through the open window making attractive elongated soft shadows on desk, wispy sheer curtain at right edge x=97%, cozy texture, relaxed aspirational seaside vibe. Style: premium stylized 3D illustration with realistic tactile paper, sculpted rounded objects, painterly subtle texture, warm cinematic art direction, playful but refined. Color palette warm ivory, honey wood, butter yellow, peach, turquoise sea, a subtle tiny purple accent for Go More Hub. Entire scene softly illuminated, no dark room. No text, no logos, no people, no smartphone or computer (these will be added precisely in code). No corkboard or noticeboard. Wide landscape aspect ratio 16:10.
-
-The smartphone, brand card, notebook and clickable post-it menus are HTML/CSS elements layered over the scene. Ocean motion is rendered in code, limited to the water; no stock media or video files are required.
+Placement follows the user-provided annotated composition. The blue annotation rings are not part of the page. Highlights come from the upper right, with subtle shadows toward the lower left. Ocean motion is confined to the water in the new background.
 
 ## Supplied official logos
 
