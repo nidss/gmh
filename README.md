@@ -27,7 +27,7 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 - All four objects follow measured coordinates from the 2926 × 1081 placement reference. The supplied cutouts include their labels; no separate sticky notes or synthetic ground shadows are added.
 - One world on every screen: a camera fits all four objects on wide screens (desktop, iPad landscape, phone landscape) and pans along the desk on tall screens (phone and iPad portrait). The choice follows the measured object bounds and tap size, not a width breakpoint. On screens taller than the panorama, the supplied outpaint strips continue the scene above and below; on wide screens the original panorama is shown exactly as before.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
-- A handful of faint golden firefly motes (9 to 22, scaled to the screen) drift through the room on one small canvas at about 30 frames per second, shifting slightly with the scene while panning.
+- Fine golden dust (12 to 28 motes, scaled to the screen) settles slowly under gravity, sways in a gentle air current, glows brighter near the painted sun and glints as it turns. One small canvas at about 30 frames per second; motes nearer the viewer shift more while panning.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.
 - Thai / English switch with optional local preference storage.
 - Native accessible dialogs, Escape to close and restored keyboard focus.

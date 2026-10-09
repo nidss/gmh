@@ -94,7 +94,7 @@
 #sound-toggle[aria-pressed=true]{color:var(--purple)}
 @media(max-width:700px){#sound-toggle{min-height:44px;min-width:44px}}
 @media(max-width:360px){.header-actions{gap:4px}.header-dot{display:none}.site-name{font-size:9px;letter-spacing:.4px;padding:8px}.explore-menu>#explore-toggle{padding:8px 9px}#motion-toggle,#sound-toggle{padding:8px 6px;min-width:40px}.language-button{padding:8px 7px}}
-/* Fireflies: faint golden motes above the scene, below every control. */
-.firefly-canvas{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
-.camera-ready .firefly-canvas{display:block}
-.firefly-canvas.running{opacity:1}
+/* Dust in sunlight: faint golden motes above the scene, below every control. */
+.dust-canvas{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
+.camera-ready .dust-canvas{display:block}
+.dust-canvas.running{opacity:1}

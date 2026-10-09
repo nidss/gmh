@@ -17,7 +17,7 @@
   let paused = reducedMotion.matches || readPreference('gmh-motion') === 'paused';
   let returnFocus = null;
   let ocean = null;
-  let fireflies = null;
+  let dust = null;
   const translate = scope => scope.querySelectorAll('[data-th][data-en]').forEach(element => {
     element.textContent = element.dataset[language].replace(/\\n/g, '\n');
   });
@@ -56,7 +56,7 @@
   }
   function syncEffects() {
     ocean?.sync();
-    fireflies?.sync();
+    dust?.sync();
   }
   function closeExplore() {
     exploreButton.setAttribute('aria-expanded', 'false');
@@ -204,7 +204,7 @@
     if (mode === 'pan') viewport.scrollLeft = focus * width - vw / 2;
     updateCues();
     ocean?.resize();
-    fireflies?.resize();
+    dust?.resize();
   }
   // Point to the nearest object off each side of the screen, so people know there is more desk to explore.
   function updateCues() {
@@ -481,50 +481,60 @@
     canvas.classList.add('ready');
     ocean.sync();
   }
-  // Fireflies: a few faint golden motes drifting through the warm light, paused with the rest of the motion.
-  function createFireflies() {
-    const canvas = document.querySelector('#firefly-canvas');
+  // Dust in sunlight: a few fine motes settle slowly through the warm air and catch the light near the sun.
+  function createDust() {
+    const canvas = document.querySelector('#dust-canvas');
     const context = canvas.getContext('2d');
     if (!context) return null;
-    // One soft glow is drawn once and stamped for every mote.
+    // One soft speck is drawn once and stamped for every mote.
     const sprite = document.createElement('canvas');
     sprite.width = sprite.height = 64;
     const glow = sprite.getContext('2d');
     const gradient = glow.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gradient.addColorStop(0, 'rgba(255,252,232,1)');
-    gradient.addColorStop(.16, 'rgba(255,230,150,.95)');
-    gradient.addColorStop(.42, 'rgba(255,200,96,.32)');
-    gradient.addColorStop(1, 'rgba(255,184,72,0)');
+    gradient.addColorStop(0, 'rgba(255,252,236,1)');
+    gradient.addColorStop(.22, 'rgba(255,234,170,.85)');
+    gradient.addColorStop(.5, 'rgba(255,206,120,.22)');
+    gradient.addColorStop(1, 'rgba(255,190,90,0)');
     glow.fillStyle = gradient;
     glow.fillRect(0, 0, 64, 64);
     const random = (min, max) => min + Math.random() * (max - min);
     let motes = [], width = 0, height = 0, ratio = 1, frame = 0, last = 0, drawn = 0, time = 0;
-    const spawn = () => ({
-      x:random(0, innerWidth), y:random(0, innerHeight), size:random(12, 26), speed:random(5, 12),
-      heading:random(0, Math.PI * 2), turn:random(.15, .45), phase:random(0, 100), pulse:random(.35, .85), peak:random(.5, .85)
-    });
+    // depth 0 is far (small, slow), 1 is close to the viewer (larger, faster, softer).
+    const spawn = (top = false) => {
+      const depth = Math.random();
+      return {
+        x:random(0, innerWidth), y:top ? random(-40, -10) : random(0, innerHeight), depth,
+        size:5 + depth * 9, fall:3 + depth * 7, sway:random(4, 10) * (.5 + depth),
+        drift:random(.05, .14), phase:random(0, 100), spin:random(.6, 1.6), opacity:random(.55, .9)
+      };
+    };
     function move(delta) {
       for (const mote of motes) {
-        mote.heading += Math.sin(time * mote.turn + mote.phase) * delta * .9;
-        mote.x += Math.cos(mote.heading) * mote.speed * delta;
-        // A slight lift, like dust rising in warm air.
-        mote.y += (Math.sin(mote.heading) * mote.speed - 3) * delta;
-        if (mote.y < -mote.size) mote.y = height + mote.size;
-        else if (mote.y > height + mote.size) mote.y = -mote.size;
+        // Gravity pulls each mote down; a slow air current sways it side to side.
+        mote.y += mote.fall * delta;
+        mote.x += Math.sin(time * mote.drift + mote.phase) * mote.sway * delta;
+        if (mote.y > height + 20) Object.assign(mote, spawn(true));
       }
     }
     function draw() {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       context.clearRect(0, 0, width, height);
       context.globalCompositeOperation = 'lighter';
-      // While panning, the motes shift a little with the scene so they feel inside the room.
-      const drift = camera.mode === 'pan' ? -viewport.scrollLeft * .35 : 0;
+      const scroll = camera.mode === 'pan' ? viewport.scrollLeft : 0;
+      // The sun in the painting, in screen coordinates.
+      const scene = world.getBoundingClientRect();
+      const sunX = scene.left + scene.width * .69, sunY = scene.top + scene.height * .38;
+      const reach = Math.max(width, height) * .55;
       for (const mote of motes) {
-        const span = width + mote.size * 2;
-        const x = (((mote.x + drift + mote.size) % span) + span) % span - mote.size;
-        const flicker = Math.pow(.5 + .5 * Math.sin(time * mote.pulse + mote.phase), 2);
-        context.globalAlpha = mote.peak * (.3 + .7 * flicker);
-        context.drawImage(sprite, x - mote.size, mote.y - mote.size, mote.size * 2, mote.size * 2);
+        const span = width + 40;
+        const x = (((mote.x - scroll * (.2 + mote.depth * .4) + 20) % span) + span) % span - 20;
+        const distance = Math.hypot(x - sunX, mote.y - sunY) / reach;
+        const light = .4 + .6 * Math.exp(-distance * distance);
+        // A turning speck flashes briefly when it faces the sun.
+        const glint = Math.pow(Math.max(0, Math.sin(time * mote.spin + mote.phase)), 14);
+        context.globalAlpha = Math.min(1, mote.opacity * light * (.55 + glint * .9));
+        const size = mote.size * (1 + glint * .35);
+        context.drawImage(sprite, x - size, mote.y - size, size * 2, size * 2);
       }
     }
     function tick(now) {
@@ -542,8 +552,8 @@
         height = innerHeight;
         canvas.width = Math.round(width * ratio);
         canvas.height = Math.round(height * ratio);
-        // Only a handful: about one per 90,000 px² of screen, 9 to 22 in all.
-        const count = Math.max(9, Math.min(22, Math.round(width * height / 90000)));
+        // Only a handful: about one per 70,000 px² of screen, 12 to 28 in all.
+        const count = Math.max(12, Math.min(28, Math.round(width * height / 70000)));
         motes = Array.from({ length:count }, (_, index) => motes[index] || spawn());
         draw();
       },
@@ -556,9 +566,9 @@
       }
     };
   }
-  fireflies = createFireflies();
-  fireflies?.resize();
-  fireflies?.sync();
+  dust = createDust();
+  dust?.resize();
+  dust?.sync();
   if (image.complete && image.naturalWidth) initializeOcean();
   else image.addEventListener('load', initializeOcean, { once:true });
 })();
