@@ -17,6 +17,7 @@
   let paused = reducedMotion.matches || readPreference('gmh-motion') === 'paused';
   let returnFocus = null;
   let ocean = null;
+  let dust = null;
   const translate = scope => scope.querySelectorAll('[data-th][data-en]').forEach(element => {
     element.textContent = element.dataset[language].replace(/\\n/g, '\n');
   });
@@ -51,7 +52,11 @@
     root.style.setProperty('--scene-x', '0px');
     root.style.setProperty('--scene-y', '0px');
     motionLabels();
+    syncEffects();
+  }
+  function syncEffects() {
     ocean?.sync();
+    dust?.sync();
   }
   function closeExplore() {
     exploreButton.setAttribute('aria-expanded', 'false');
@@ -69,7 +74,7 @@
     dialog.scrollTop = 0;
     if (!dialog.open) dialog.showModal();
     closeButton.focus({ preventScroll:true });
-    ocean?.sync();
+    syncEffects();
   }
   languageButton.addEventListener('click', () => setLanguage(language === 'th' ? 'en' : 'th'));
   motionButton.addEventListener('click', () => {
@@ -119,7 +124,7 @@
   });
   dialog.addEventListener('close', () => {
     returnFocus?.focus({ preventScroll:true });
-    ocean?.sync();
+    syncEffects();
   });
   const ideas = [
     ['พักสักนิด แล้วออกไปค้นพบที่ใหม่ ๆ', 'Take a breather. Find a new place.'],
@@ -199,6 +204,7 @@
     if (mode === 'pan') viewport.scrollLeft = focus * width - vw / 2;
     updateCues();
     ocean?.resize();
+    dust?.resize();
   }
   // Point to the nearest object off each side of the screen, so people know there is more desk to explore.
   function updateCues() {
@@ -320,7 +326,7 @@
   viewport.addEventListener('scroll', () => { if (!cueFrame) cueFrame = requestAnimationFrame(updateCues); }, { passive:true });
   cues.forEach(cue => cue.addEventListener('click', () => glide(centreOf(STOPS[Number(cue.dataset.stop)]), 700)));
   window.addEventListener('resize', fitScene, { passive:true });
-  document.addEventListener('visibilitychange', () => ocean?.sync());
+  document.addEventListener('visibilitychange', syncEffects);
   document.querySelector('#year').textContent = new Date().getFullYear();
   setLanguage(language);
   setMotion(paused);
@@ -475,6 +481,94 @@
     canvas.classList.add('ready');
     ocean.sync();
   }
+  // Dust in sunlight: a few fine motes settle slowly through the warm air and catch the light near the sun.
+  function createDust() {
+    const canvas = document.querySelector('#dust-canvas');
+    const context = canvas.getContext('2d');
+    if (!context) return null;
+    // One soft speck is drawn once and stamped for every mote.
+    const sprite = document.createElement('canvas');
+    sprite.width = sprite.height = 64;
+    const glow = sprite.getContext('2d');
+    const gradient = glow.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255,252,236,1)');
+    gradient.addColorStop(.22, 'rgba(255,234,170,.85)');
+    gradient.addColorStop(.5, 'rgba(255,206,120,.22)');
+    gradient.addColorStop(1, 'rgba(255,190,90,0)');
+    glow.fillStyle = gradient;
+    glow.fillRect(0, 0, 64, 64);
+    const random = (min, max) => min + Math.random() * (max - min);
+    let motes = [], width = 0, height = 0, ratio = 1, frame = 0, last = 0, drawn = 0, time = 0;
+    // depth 0 is far (small, slow), 1 is close to the viewer (larger, faster, softer).
+    const spawn = (top = false) => {
+      const depth = Math.random();
+      return {
+        x:random(0, innerWidth), y:top ? random(-40, -10) : random(0, innerHeight), depth,
+        size:5 + depth * 9, fall:3 + depth * 7, sway:random(4, 10) * (.5 + depth),
+        drift:random(.05, .14), phase:random(0, 100), spin:random(.6, 1.6), opacity:random(.55, .9)
+      };
+    };
+    function move(delta) {
+      for (const mote of motes) {
+        // Gravity pulls each mote down; a slow air current sways it side to side.
+        mote.y += mote.fall * delta;
+        mote.x += Math.sin(time * mote.drift + mote.phase) * mote.sway * delta;
+        if (mote.y > height + 20) Object.assign(mote, spawn(true));
+      }
+    }
+    function draw() {
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.clearRect(0, 0, width, height);
+      context.globalCompositeOperation = 'lighter';
+      const scroll = camera.mode === 'pan' ? viewport.scrollLeft : 0;
+      // The sun in the painting, in screen coordinates.
+      const scene = world.getBoundingClientRect();
+      const sunX = scene.left + scene.width * .69, sunY = scene.top + scene.height * .38;
+      const reach = Math.max(width, height) * .55;
+      for (const mote of motes) {
+        const span = width + 40;
+        const x = (((mote.x - scroll * (.2 + mote.depth * .4) + 20) % span) + span) % span - 20;
+        const distance = Math.hypot(x - sunX, mote.y - sunY) / reach;
+        const light = .4 + .6 * Math.exp(-distance * distance);
+        // A turning speck flashes briefly when it faces the sun.
+        const glint = Math.pow(Math.max(0, Math.sin(time * mote.spin + mote.phase)), 14);
+        context.globalAlpha = Math.min(1, mote.opacity * light * (.55 + glint * .9));
+        const size = mote.size * (1 + glint * .35);
+        context.drawImage(sprite, x - size, mote.y - size, size * 2, size * 2);
+      }
+    }
+    function tick(now) {
+      const delta = last ? Math.min(now - last, 100) / 1000 : 0;
+      last = now;
+      time += delta;
+      move(delta);
+      if (now - drawn > 33) { draw(); drawn = now; }
+      frame = requestAnimationFrame(tick);
+    }
+    return {
+      resize() {
+        ratio = Math.min(devicePixelRatio || 1, 1.5);
+        width = innerWidth;
+        height = innerHeight;
+        canvas.width = Math.round(width * ratio);
+        canvas.height = Math.round(height * ratio);
+        // Only a handful: about one per 70,000 px² of screen, 12 to 28 in all.
+        const count = Math.max(12, Math.min(28, Math.round(width * height / 70000)));
+        motes = Array.from({ length:count }, (_, index) => motes[index] || spawn());
+        draw();
+      },
+      sync() {
+        cancelAnimationFrame(frame);
+        last = 0;
+        const running = !paused && !reducedMotion.matches && !document.hidden && !dialog.open;
+        canvas.classList.toggle('running', running);
+        if (running) frame = requestAnimationFrame(tick);
+      }
+    };
+  }
+  dust = createDust();
+  dust?.resize();
+  dust?.sync();
   if (image.complete && image.naturalWidth) initializeOcean();
   else image.addEventListener('load', initializeOcean, { once:true });
 })();
