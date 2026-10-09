@@ -1,4 +1,4 @@
-name: Verify and deploy Go More Hub
+name: Verify and publish Go More Hub
 
 on:
   push:
@@ -6,33 +6,25 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
-  id-token: write
 
 concurrency:
-  group: github-pages
+  group: publish-go-more-hub
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Verify website
         run: npm run check
-      - name: Prepare public website
-        run: |
-          mkdir _site
-          cp index.html styles.css script.js .nojekyll _site/
-          cp -r assets _site/assets
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      - name: Deploy website
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Sync verified main to the publishing branch
+        run: git push origin HEAD:gh-pages
+      - name: Request GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds"

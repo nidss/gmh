@@ -2,6 +2,8 @@
 
 Company landing page for Go More Hub, introducing Villadd and ThaiMove.
 
+Public website: **https://nidss.github.io/gmh/**
+
 Built with semantic HTML, CSS and JavaScript. No build step or runtime dependencies.
 
 ## Local preview
@@ -13,9 +15,11 @@ npm run check
 
 Visit http://127.0.0.1:4173.
 
-## Publish
+## Publishing
 
-The website lives at the repository root. In Settings → Pages, choose **Deploy from a branch**, **main**, and **/(root)**, then save. The public URL is https://nidss.github.io/gmh/.
+All source code lives on **main**. The workflow verifies the website, fast-forwards the **gh-pages** publishing branch to the verified main commit, and explicitly requests a GitHub Pages build. GitHub Pages then builds and deploys with its normal protected publishing environment. Push future changes to main to update the website automatically. No personal access token is required.
+
+The repository and website are public. Pages currently uses gh-pages / (root).
 
 ## Features
 
