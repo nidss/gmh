@@ -20,10 +20,10 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 ## Features
 
 - The supplied post-it at the left window frame opens About Us.
-- The supplied rotary phone on the left of the desk opens Contact Us.
+- The rotary phone on the left has a yellow Contact Us post-it and opens the contact panel. Its image is edited from the supplied phone with sunset lighting.
 - The supplied picture frame on the right opens the product collection, including Villadd and ThaiMove (Coming Soon).
 - The Explore menu also gives direct access to every section and Find Us On.
-- The three objects follow the supplied placement reference. CSS adds warm tonal adjustments, contact shadows and soft shadows cast toward the lower left.
+- The three objects follow the supplied placement reference. CSS adds contact shadows and projects the phone and frame silhouettes toward the lower left, following the sunset.
 - The frame is mirrored horizontally to match the reference.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.

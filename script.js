@@ -58,7 +58,7 @@
     const template = document.querySelector('#panel-' + name);
     if (!(template instanceof HTMLTemplateElement)) return;
     closeExplore();
-    if (!dialog.open) returnFocus = trigger;
+    if (!dialog.open) returnFocus = exploreList.contains(trigger) ? exploreButton : trigger;
     dialogBody.replaceChildren(template.content.cloneNode(true));
     dialogBody.querySelector('h2').id = 'dialog-title';
     translate(dialogBody);

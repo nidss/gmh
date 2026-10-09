@@ -1,8 +1,8 @@
 # Visual assets
 
-## Current scene — supplied artwork
+## Supplied source artwork
 
-These four images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. No AI regeneration, cropping or retouching was used. Lighting and shadows are applied through CSS, so the three objects remain independent clickable elements.
+These four source images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. The background, frame and window note use these exports directly. The current telephone uses the edited derivative documented below. The three scene objects remain independent clickable elements.
 
 - assets/window-sunset.webp — gmhbg.png, 1920 × 1080, background.
 - assets/picture-frame.webp — picframe.png, 1254 × 1254, right side of desk. Displayed mirrored horizontally, as in the placement reference.
@@ -10,6 +10,22 @@ These four images were supplied by the user and exported to WebP at original dim
 - assets/good-things-note.webp — postit.png, 1254 × 1254, left window edge.
 
 Placement follows the user-provided annotated composition. The blue annotation rings are not part of the page. Highlights come from the upper right, with subtle shadows toward the lower left. Ocean motion is confined to the water in the new background.
+
+
+## Current telephone — assets/rotary-phone-contact.webp
+
+Edited from the supplied phone.png using the built-in ImageGen tool, preserving its square composition, shape, cord and transparent background. The edit adds a yellow Contact Us post-it on the front left, with warm highlights from the upper right. Dimensions: 1254 × 1254. WebP quality 95. The original telephone export is retained separately.
+
+CSS projects the phone and frame silhouettes onto the desk toward the lower left, using soft alpha masks with darker contact shadows at the base.
+
+Final edit prompt:
+
+Use case: precise-object-edit / lighting-weather. Asset type: transparent cutout for an interactive company website.
+Input image 1 is the EDIT TARGET: the supplied warm beige rotary telephone. Image 2 is ONLY a lighting reference: the actual sunset window background. Image 3 is ONLY a reference for the placement and lettering of a sticky note; do not copy its cartoon rendering.
+Edit image 1 only. Keep the telephone's exact shape, viewpoint, handset, cord, rotary dial, beige material and square framing. Keep the object at its original scale and position within the square, with roughly 16% empty transparent space above and 13% below. Do not crop any cord or feet.
+Add one pale butter-yellow paper post-it attached to the FRONT LEFT face of the phone, in the same arrangement as reference image 3: slightly tilted clockwise, its upper edge attached just left of the rotary dial, the lower part hanging in front of the phone body. The note must be immediately readable at website size: about 26% of the telephone's total width, realistic paper grain and a very slight lifted corner with its own fine contact shadow. Write exactly "Contact" on line 1 and "Us" on line 2, dark black, bold friendly handwritten marker lettering. No other text.
+Relight the telephone and note to match the golden sunset from the UPPER RIGHT of image 2. Brighter warm highlights on right-facing edges, gently darker left-facing surfaces, no cold studio reflections. Keep realistic dimensional depth and preserve all original telephone details.
+Output the phone plus its attached post-it ONLY on a genuinely transparent background. Do NOT include the wooden table, window, beach, any background color or backdrop, or a large baked floor shadow. The website will add a directional ground shadow separately so it blends with the existing table. Square composition, preserve alpha, no extra objects, no watermark.
 
 ## Supplied official logos
 
