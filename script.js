@@ -35,12 +35,14 @@
     languageButton.setAttribute('aria-label', next === 'th' ? 'Switch language to English' : 'เปลี่ยนเป็นภาษาไทย');
     closeButton.setAttribute('aria-label', next === 'th' ? 'ปิดหน้าต่าง' : 'Close dialog');
     viewport.setAttribute('aria-label', next === 'th' ? 'ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้' : 'Go More Hub scene. Scroll to explore.');
-    document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนูสำรวจ Go More Hub' : 'Explore Go More Hub');
+    document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนู Go More Hub' : 'Go More Hub menu');
     document.querySelector('.supplied-phone').setAttribute('aria-label', next === 'th' ? 'ติดต่อ Go More Hub' : 'Contact Go More Hub');
     document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'Villadd — จองที่พักพูลวิลล่า' : 'Villadd — Pool villa booking');
     document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
     document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove — เร็ว ๆ นี้' : 'ThaiMove — Coming Soon');
     motionLabels();
+    soundLabels();
+    updateCues();
     writePreference('gmh-language', next);
   }
   function setMotion(value) {
@@ -82,7 +84,14 @@
   });
   document.addEventListener('click', async event => {
     const trigger = event.target.closest('[data-open]');
-    if (trigger) { openPanel(trigger.dataset.open, trigger); return; }
+    if (trigger) {
+      const stop = camera.mode === 'pan' && exploreList.contains(trigger) && STOPS.find(item => item.panels.includes(trigger.dataset.open));
+      if (stop && Math.abs(centreOf(stop) - viewport.scrollLeft) > viewport.clientWidth * .25) {
+        closeExplore();
+        glide(centreOf(stop), 650).then(() => openPanel(trigger.dataset.open, trigger));
+      } else openPanel(trigger.dataset.open, trigger);
+      return;
+    }
     if (!event.target.closest('#explore')) closeExplore();
     const copy = event.target.closest('[data-copy]');
     if (copy) {
@@ -126,22 +135,225 @@
     target.dataset.en = idea[1];
     target.textContent = idea[language === 'th' ? 0 : 1];
   }
-  let wasMobile = false;
+  // Camera: every screen sees the same world. Wide screens fit all four objects; tall or narrow screens pan along the desk.
+  const SCENE_W = 2926, SCENE_H = 1081;
+  // Object bounds on the native canvas (from the measured positions in styles.css), with a small margin.
+  const SAFE = { x0:.245, x1:.83, y0:.33, y1:.98 };
+  // The supplied outpaint continues the scene 520px above and 200px below the original panorama.
+  const EXTEND_TOP = 520 / SCENE_H, EXTEND_BOTTOM = 200 / SCENE_H;
+  const NOTE_H = .1386 * SCENE_H;
+  const STOPS = [
+    { x:.325, label:'About · Contact', panels:['about', 'contact'] },
+    { x:.502, label:'ThaiMove', panels:['thaimove'] },
+    { x:.753, label:'Villadd', panels:['villadd'] }
+  ];
+  const header = document.querySelector('.site-header');
+  const cues = [document.querySelector('.edge-prev'), document.querySelector('.edge-next')];
+  const stopMarkers = STOPS.map(() => {
+    const marker = document.createElement('span');
+    marker.className = 'scene-stop';
+    marker.setAttribute('aria-hidden', 'true');
+    viewport.append(marker);
+    return marker;
+  });
+  const camera = { mode:'', width:0 };
+  let tween = 0, tourTimer = 0, cueFrame = 0;
+  // Keep a range centred on the safe zone, covering the screen where possible, but never hide an object under the controls.
+  function place(size, view, low, high, start, end, before = 0, after = 0) {
+    let position = (low + high) / 2 - (start + end) / 2 * size;
+    position = size >= view ? Math.min(0, Math.max(view - size, position)) : (view - size) / 2;
+    // Where the panorama is shorter than the screen, the outpaint strips (before / after, in panorama heights) cover the rest.
+    const first = before * size, last = (1 + after) * size;
+    if (size < view) position = first + last >= view ? Math.min(first, Math.max(view - last, position)) : (view - last + first) / 2;
+    return Math.max(low - start * size, Math.min(high - end * size, position));
+  }
+  const centreOf = stop => stop.x * camera.width - viewport.clientWidth / 2;
   function fitScene() {
-    const mobile = matchMedia('(max-width:700px)').matches;
-    if (mobile && !wasMobile) {
-      viewport.scrollLeft = Math.max(0, world.clientWidth * .34 - viewport.clientWidth / 2);
-      viewport.scrollTop = Math.max(0, world.clientHeight - viewport.clientHeight);
+    root.classList.add('camera-ready');
+    const vw = viewport.clientWidth, vh = viewport.clientHeight;
+    const focus = camera.mode === 'pan' ? (viewport.scrollLeft + vw / 2) / camera.width : STOPS[1].x;
+    const top = header.getBoundingClientRect().bottom + 10;
+    const bottom = 8;
+    const availableH = Math.max(120, vh - top - bottom);
+    const safeW = (SAFE.x1 - SAFE.x0) * SCENE_W, safeH = (SAFE.y1 - SAFE.y0) * SCENE_H;
+    const fitScale = Math.min((vw - 32) / safeW, availableH / safeH, Math.max(vw / SCENE_W, vh / SCENE_H));
+    // Fit only while the smallest note stays easy to tap and the scene fills most of the screen height.
+    const mode = fitScale * NOTE_H >= 46 && fitScale * SCENE_H >= vh * .55 ? 'fit' : 'pan';
+    let scale = fitScale;
+    if (mode === 'pan') {
+      const share = Math.min(.8, Math.max(.45, vw / 1000));
+      scale = Math.max(fitScale, Math.min(vw / (share * safeW), availableH / SCENE_H), vh / (SCENE_H * (1 + EXTEND_TOP + EXTEND_BOTTOM)));
     }
-    wasMobile = mobile;
+    const width = Math.round(SCENE_W * scale), height = Math.round(SCENE_H * scale);
+    const x = mode === 'fit' ? place(width, vw, 16, vw - 16, SAFE.x0, SAFE.x1) : Math.max(0, (vw - width) / 2);
+    const y = place(height, vh, top, vh - bottom, SAFE.y0, SAFE.y1, EXTEND_TOP, EXTEND_BOTTOM);
+    root.style.setProperty('--world-w', width + 'px');
+    root.style.setProperty('--world-x', Math.round(x) + 'px');
+    root.style.setProperty('--world-y', Math.round(y) + 'px');
+    root.style.setProperty('--cue-y', Math.round(y + height * .2) + 'px');
+    root.classList.toggle('scene-fit', mode === 'fit');
+    root.classList.toggle('scene-pan', mode === 'pan');
+    camera.mode = mode;
+    camera.width = width;
+    stopMarkers.forEach((marker, index) => { marker.style.left = Math.round(x + STOPS[index].x * width) + 'px'; });
+    if (mode === 'pan') viewport.scrollLeft = focus * width - vw / 2;
+    updateCues();
     ocean?.resize();
   }
+  // Point to the nearest object off each side of the screen, so people know there is more desk to explore.
+  function updateCues() {
+    cueFrame = 0;
+    const vw = viewport.clientWidth;
+    const onScreen = stop => stop.x * camera.width - viewport.scrollLeft;
+    const panning = camera.mode === 'pan' && camera.width > vw + 1;
+    const targets = panning ? [
+      STOPS.filter(stop => onScreen(stop) < vw * .1).pop(),
+      STOPS.find(stop => onScreen(stop) > vw * .9)
+    ] : [];
+    cues.forEach((cue, index) => {
+      const stop = targets[index];
+      cue.classList.toggle('is-visible', Boolean(stop));
+      if (!stop) return;
+      cue.dataset.stop = String(STOPS.indexOf(stop));
+      cue.querySelector('.edge-label').textContent = stop.label;
+      cue.setAttribute('aria-label', (language === 'th' ? 'เลื่อนไปที่ ' : 'Go to ') + stop.label);
+    });
+  }
+  function stopGlide() {
+    cancelAnimationFrame(tween);
+    clearTimeout(tourTimer);
+    root.classList.remove('camera-moving');
+  }
+  function glide(target, duration) {
+    stopGlide();
+    const from = viewport.scrollLeft;
+    const to = Math.max(0, Math.min(camera.width - viewport.clientWidth, target));
+    if (paused || reducedMotion.matches || Math.abs(to - from) < 2) {
+      viewport.scrollLeft = to;
+      return Promise.resolve();
+    }
+    // Snapping would fight the animated scroll, so it is switched off until the camera arrives.
+    root.classList.add('camera-moving');
+    return new Promise(resolve => {
+      const start = performance.now();
+      const step = now => {
+        const t = Math.min(1, (now - start) / duration);
+        viewport.scrollLeft = from + (to - from) * (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        if (t < 1) tween = requestAnimationFrame(step);
+        else { root.classList.remove('camera-moving'); resolve(); }
+      };
+      tween = requestAnimationFrame(step);
+    });
+  }
+  // On the first visit of a session, sweep once along the desk so every object is seen.
+  function tour() {
+    let seen = false;
+    try { seen = sessionStorage.getItem('gmh-tour') === '1'; sessionStorage.setItem('gmh-tour', '1'); } catch { /* Optional storage. */ }
+    if (seen || camera.mode !== 'pan' || paused || reducedMotion.matches || dialog.open) return;
+    glide(centreOf(STOPS[0]), 650)
+      .then(() => glide(centreOf(STOPS[2]), 1500))
+      .then(() => glide(centreOf(STOPS[1]), 850));
+  }
+  // Ambient beach sound: off until the visitor turns it on. Web Audio keeps the loop gapless and fades it in and out.
+  const soundButton = document.querySelector('#sound-toggle');
+  const SOUND_VOLUME = .55;
+  let soundOn = readPreference('gmh-sound') === 'on';
+  let audio = null;
+  function soundLabels() {
+    soundButton.setAttribute('aria-pressed', String(soundOn));
+    soundButton.setAttribute('aria-label', language === 'th' ? 'เสียงบรรยากาศ' : 'Ambient sound');
+    soundButton.title = soundOn ? (language === 'th' ? 'ปิดเสียง' : 'Mute sound') : (language === 'th' ? 'เปิดเสียง' : 'Play sound');
+  }
+  function createAudio() {
+    const Context = window.AudioContext || window.webkitAudioContext;
+    if (!Context) return null;
+    const context = new Context();
+    const gain = context.createGain();
+    gain.gain.value = 0;
+    gain.connect(context.destination);
+    const ready = fetch('assets/windy-beach.mp3')
+      .then(response => { if (!response.ok) throw new Error('Sound unavailable'); return response.arrayBuffer(); })
+      .then(data => new Promise((resolve, reject) => context.decodeAudioData(data, resolve, reject)))
+      .then(buffer => {
+        const source = context.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        source.connect(gain);
+        source.start();
+      });
+    return { context, gain, ready };
+  }
+  function syncSound() {
+    if (!audio) return;
+    const audible = soundOn && !document.hidden;
+    const level = audio.gain.gain, now = audio.context.currentTime;
+    level.cancelScheduledValues(now);
+    level.setValueAtTime(level.value, now);
+    level.linearRampToValueAtTime(audible ? SOUND_VOLUME : 0, now + (audible ? 1.6 : .4));
+    if (audible) audio.context.resume();
+    else setTimeout(() => { if (audio && !(soundOn && !document.hidden)) audio.context.suspend(); }, 450);
+  }
+  function setSound(value) {
+    soundOn = value;
+    // The audio context must be created inside the visitor's gesture for browsers to allow playback.
+    if (soundOn && !audio) {
+      audio = createAudio();
+      audio?.ready.catch(() => { audio = null; soundOn = false; soundLabels(); });
+      if (!audio) soundOn = false;
+    }
+    soundLabels();
+    syncSound();
+  }
+  // Browsers block sound until a gesture, so a saved "on" preference starts on the first tap, click or key press.
+  const resumeEvents = ['click', 'keydown', 'touchend'];
+  function resumeSound(event) {
+    resumeEvents.forEach(type => document.removeEventListener(type, resumeSound, true));
+    if (soundOn && !audio && !soundButton.contains(event.target)) setSound(true);
+  }
+  if (soundOn) resumeEvents.forEach(type => document.addEventListener(type, resumeSound, true));
+  soundButton.addEventListener('click', () => {
+    setSound(!soundOn);
+    writePreference('gmh-sound', soundOn ? 'on' : 'off');
+  });
+  document.addEventListener('visibilitychange', syncSound);
+  ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(type => viewport.addEventListener(type, stopGlide, { passive:true }));
+  viewport.addEventListener('scroll', () => { if (!cueFrame) cueFrame = requestAnimationFrame(updateCues); }, { passive:true });
+  cues.forEach(cue => cue.addEventListener('click', () => glide(centreOf(STOPS[Number(cue.dataset.stop)]), 700)));
   window.addEventListener('resize', fitScene, { passive:true });
   document.addEventListener('visibilitychange', () => ocean?.sync());
   document.querySelector('#year').textContent = new Date().getFullYear();
   setLanguage(language);
   setMotion(paused);
   fitScene();
+  const startTour = () => setTimeout(tour, 500);
+  const backdrop = document.querySelector('#world-background');
+  if (backdrop.complete) startTour(); else backdrop.addEventListener('load', startTour, { once:true });
+
+  // On phones the dialog is a paper sheet; pull it down from the top to close it.
+  const sheetLayout = matchMedia('(max-width:700px)');
+  let drag = null;
+  dialog.addEventListener('touchstart', event => {
+    drag = sheetLayout.matches && dialog.scrollTop <= 0 && event.touches.length === 1 ? { y:event.touches[0].clientY, distance:0 } : null;
+  }, { passive:true });
+  dialog.addEventListener('touchmove', event => {
+    if (!drag) return;
+    drag.distance = Math.max(0, event.touches[0].clientY - drag.y);
+    if (drag.distance > 0 && dialog.scrollTop <= 0) {
+      event.preventDefault();
+      dialog.style.transform = 'translateY(' + drag.distance + 'px)';
+    }
+  }, { passive:false });
+  dialog.addEventListener('touchend', () => {
+    if (!drag) return;
+    const dismiss = drag.distance > 90;
+    drag = null;
+    dialog.style.transition = 'transform .22s ease';
+    dialog.style.transform = dismiss ? 'translateY(100%)' : '';
+    setTimeout(() => {
+      dialog.style.transition = '';
+      if (dismiss) { dialog.close(); dialog.style.transform = ''; }
+    }, 230);
+  });
 
   // Animate only the water in the supplied background; the beach and window stay sharp.
   const image = document.querySelector('#world-background');
