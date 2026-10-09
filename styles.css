@@ -17,9 +17,9 @@
 .supplied-phone .object-image{filter:brightness(.98) saturate(.96) drop-shadow(-.28cqw .28cqw .14cqw #3c210b70) drop-shadow(-.85cqw .44cqw .38cqw #49270c35)}
 .supplied-phone:before,.supplied-frame:before{content:'';position:absolute;z-index:-1;pointer-events:none;border-radius:50%;background:#47240a;filter:blur(.4cqw);opacity:.35;transform:skewX(-30deg)}
 .supplied-phone:before{left:-11%;top:83.5%;width:103%;height:7%}
-.supplied-frame{left:85.5%;top:83.55%;width:17%;aspect-ratio:.94}
-.supplied-frame .object-image{transform:scaleX(-1);filter:brightness(.96) saturate(.95) drop-shadow(.34cqw .2cqw .13cqw #42220965) drop-shadow(.7cqw .32cqw .4cqw #3f230b35)}
-.supplied-frame:before{left:-12%;top:88%;width:103%;height:7%;opacity:.3}
+.supplied-frame{left:85.389%;top:83.933%;width:16.194%;aspect-ratio:.96236}
+.supplied-frame .object-image{filter:brightness(.96) saturate(.95) drop-shadow(-.34cqw .2cqw .13cqw #42220965) drop-shadow(-.7cqw .32cqw .4cqw #3f230b35)}
+.supplied-frame:before{left:-12%;top:89.5%;width:103%;height:7%;opacity:.3}
 .object-caption{position:absolute;left:50%;bottom:10%;transform:translate(-50%,4px);width:max-content;max-width:200%;padding:.45cqw .8cqw;border-radius:2cqw;background:#fff3dce8;border:1px solid #e5c99799;box-shadow:0 2px 7px #44270e22;font-size:.72cqw;letter-spacing:.01cqw;color:#493519;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
 .supplied-note .object-caption{bottom:-5%}
 .supplied-frame .object-caption{bottom:13%}
@@ -42,5 +42,5 @@
 .supplied-phone .object-image{filter:drop-shadow(-.15cqw .1cqw .1cqw #40210855)}
 .supplied-phone:after,.supplied-frame:after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to bottom,#3d210b00 8%,#3d210b50 24%,#3d210b80 55%,#3d210ba0 88%);mask-repeat:no-repeat;mask-position:center;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;filter:blur(.40cqw);opacity:.48}
 .supplied-phone:after{mask-image:url('assets/rotary-phone-contact.webp');-webkit-mask-image:url('assets/rotary-phone-contact.webp');transform-origin:50% 86.8%;transform:matrix(1,0,.9,-.30,0,0)}
-.supplied-frame:after{mask-image:url('assets/picture-frame.webp');-webkit-mask-image:url('assets/picture-frame.webp');transform-origin:50% 90.6%;transform:matrix(-1,0,.9,-.27,0,0);opacity:.40}
+.supplied-frame:after{mask-image:url('assets/picture-frame-villadd.webp');-webkit-mask-image:url('assets/picture-frame-villadd.webp');transform-origin:50% 92.3%;transform:matrix(1,0,.9,-.27,0,0);opacity:.40}
 .supplied-phone .object-caption{display:none}

@@ -24,7 +24,7 @@ All source code lives on **main**. The workflow checks the website, fast-forward
 - The supplied picture frame on the right opens the product collection, including Villadd and ThaiMove (Coming Soon).
 - The Explore menu also gives direct access to every section and Find Us On.
 - The three objects follow the supplied placement reference. CSS adds contact shadows and projects the phone and frame silhouettes toward the lower left, following the sunset.
-- The frame is mirrored horizontally to match the reference.
+- The frame contains the supplied Villadd cover. Its orientation is baked into the asset to match the placement reference while keeping the lettering readable.
 - Ocean texture displacement and sunlight reflections run at up to 25 frames per second, using WebGL with a Canvas 2D fallback.
 - Motion pause, system reduced motion, and automatic suspension while hidden or reading a dialog.
 - Thai / English switch with optional local preference storage.

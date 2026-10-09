@@ -2,15 +2,27 @@
 
 ## Supplied source artwork
 
-These four source images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. The background, frame and window note use these exports directly. The current telephone uses the edited derivative documented below. The three scene objects remain independent clickable elements.
+These four source images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. The background and window note use these exports directly. The current telephone and frame use the edited derivatives documented below. The three scene objects remain independent clickable elements.
 
 - assets/window-sunset.webp — gmhbg.png, 1920 × 1080, background.
-- assets/picture-frame.webp — picframe.png, 1254 × 1254, right side of desk. Displayed mirrored horizontally, as in the placement reference.
+- assets/picture-frame.webp — picframe.png, 1254 × 1254, original frame retained as a source reference.
 - assets/rotary-phone.webp — phone.png, 1254 × 1254, left side of desk.
 - assets/good-things-note.webp — postit.png, 1254 × 1254, left window edge.
 
 Placement follows the user-provided annotated composition. The blue annotation rings are not part of the page. Highlights come from the upper right, with subtle shadows toward the lower left. Ocean motion is confined to the water in the new background.
 
+
+## Current picture frame — assets/picture-frame-villadd.webp
+
+Edited from the supplied picframe.png and Cover _ Villa DD.png with built-in ImageGen. The Villadd cover replaces the beach photograph inside the white mat. Frame orientation is baked into the transparent asset; the cover lettering reads normally. Dimensions: 1254 × 1254. WebP quality 95. Placement preserves the original visible frame bounds, with sunset shadows toward the lower left. The frame still opens the product collection.
+
+Final edit prompt:
+
+Use case: compositing / precise-object-edit. Asset: transparent cutout for the existing Go More Hub website.
+Image 1 is the wooden tabletop photo frame to edit. Image 2 is the exact Villadd cover artwork to insert.
+Replace ONLY the beach photograph inside the white mat with image 2. Fit the entire square cover into the inner photo opening with the correct perspective. Keep its pool photograph, purple and black logo, exact "VILLADD" lettering and "BY GO MORE HUB" line, colors and layout faithful to the supplied artwork. Do not invent or retype additional text. Keep all of the cover visible.
+The website currently displays the wooden frame horizontally mirrored. Therefore produce the FRAME geometry horizontally mirrored relative to image 1, while keeping the inserted cover readable normally (do NOT mirror the cover or its lettering). The stand should be on the right, and the frame should lean slightly left as it descends, matching a horizontal reflection of image 1.
+Preserve the wooden border, white mat, original proportions, material, overall square 1254 x 1254 composition, object size, padding and transparency. Keep a subtle warm sunset illumination from upper right, consistent with the original. No surrounding table or scenery, no extra objects, no new floor shadow, no watermark. Output the finished wooden frame with the Villadd print on a genuinely transparent background.
 
 ## Current telephone — assets/rotary-phone-contact.webp
 
