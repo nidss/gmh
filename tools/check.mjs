@@ -1,0 +1,13 @@
+import { readFile, access } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import assert from 'node:assert/strict';
+const root = resolve(import.meta.dirname, '..');
+const html = await readFile(resolve(root, 'index.html'), 'utf8');
+const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+assert.equal(ids.length, new Set(ids).size, 'Duplicate IDs');
+for (const match of html.matchAll(/href="#([^"]+)"/g)) assert(ids.includes(match[1]), `Missing anchor: ${match[1]}`);
+for (const match of html.matchAll(/(?:src|href)="((?:assets\/|styles\.css|script\.js)[^"]*)"/g)) await access(resolve(root, match[1]));
+assert(html.includes('COMING SOON'));
+assert(html.includes('https://villadd.com/th'));
+assert(html.includes('https://nidss.github.io/thm2/'));
+console.log('Verified local assets, unique IDs, navigation targets and product destinations.');

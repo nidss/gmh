@@ -1,0 +1,10 @@
+{
+  "name": "go-more-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Go More Hub company landing page",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "check": "node --check script.js && node tools/check.mjs"
+  }
+}
