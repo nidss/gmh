@@ -23,7 +23,7 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 
 - **One coordinate system:** everything is laid out on the native 2926 × 1081 panorama (`assets/desk-panorama.webp`). `.world` keeps that aspect ratio.
 - **Clickable objects:** the four objects (`.supplied-phone`, `.supplied-frame`, `.supplied-note`, `.supplied-figure`) are positioned with percentages at the end of `styles.css`, measured against the placement reference. They are pre-cut images with their sticky-note labels baked in.
-- **Extension strips:** `desk-extension-top.webp` and `desk-extension-bottom.webp` continue the room above and below the panorama. They are cut from the outpaint `assets/gmhbg3.png` (2926 × 1801), where the original sits unchanged at y = 520, and each overlaps the panorama by 64 px with a feathered edge (hence the `5.9204%` offsets in CSS). If the panorama changes, re-cut the strips the same way.
+- **Extension strips:** `desk-extension-top.webp` and `desk-extension-bottom.webp` continue the room above and below the panorama. They are cut from a supplied outpaint, `gmhbg3.png` (2926 × 1801), which is no longer in the working tree (recover it with `git show 6299b5b:assets/gmhbg3.png > gmhbg3.png`). In that image the original sits unchanged at y = 520, and each overlaps the panorama by 64 px with a feathered edge (hence the `5.9204%` offsets in CSS). If the panorama changes, re-cut the strips the same way.
 
 ### Camera (`fitScene` in `script.js`)
 
