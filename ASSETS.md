@@ -1,30 +1,10 @@
 # Visual assets
 
-## Villadd showreel — supplied
+The first part lists every image, video and sound the page uses. The second part records earlier assets that are still in `assets/` but are no longer referenced.
 
-- Source: user-supplied villadd-launch-30s.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 29.6 s, 26.5 MB. Used unedited apart from scaling.
-- assets/villadd-showreel.webm: VP9 (CRF 36) + Opus 96 kb/s, 720 × 1280, 30 fps, about 4.4 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
-- assets/villadd-showreel.mp4: H.264 High (CRF 25) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 4.9 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
-- assets/villadd-showreel-poster.webp: the opening title card at 1.6 s ("เราคือ Villa DD"), 720 × 1280, WebP quality 82. The end card was not used because its price chips crossfade continuously.
+## In use
 
-## ThaiMove showreel — supplied
-
-- Source: user-supplied ThaiMove_showreel_15s_v2.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 15 s, 6.9 MB. Used unedited apart from scaling.
-- assets/thaimove-showreel.webm: VP9 (CRF 34) + Opus 96 kb/s, 720 × 1280, 30 fps, about 1.5 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
-- assets/thaimove-showreel.mp4: H.264 High (CRF 23) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 1.6 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
-- assets/thaimove-showreel-poster.webp: the end card at 14.5 s, 720 × 1280, WebP quality 82.
-
-## Window photo string — supplied
-
-- Source: user-supplied photo string (2000 × 667, RGBA): seven place photos pinned on a rope with brass end knobs. The Thai captions and doodles are baked in.
-- Placement: registered against the supplied mockup, which shows the string over the window sash of the gmhbg3.png outpaint. On the native panorama it sits at x 894, y −58, 1274 px wide (`.window-photos` in styles.css).
-- Processing (OpenCV + Pillow, WebP quality 90): each photo's outline is found by a morphological opening of the alpha channel and a minimum-area rectangle. All seven photos are cut out with their sides and bottom grown by 14–16 px to keep their soft painted shadow, and the top edge left in place so the rope stays in the base. The cut-outs overlap the base by 2 px to avoid seams.
-  - assets/window-string.webp — the rope, end knobs and pegs, 2000 × 667.
-  - assets/window-photo-gomorehub.webp — the Go More Hub card (no link). It was cut out later so it can swing like the others, which leaves the other six cut-outs byte-identical.
-  - assets/window-photo-central-pattaya.webp, -huay-yai, -bang-saray, -south-pattaya, -phra-tamnak, -jomtien — one per linked photo, each linking to https://villadd.com/th/villas/<area>.
-- No pixels were repainted or recoloured.
-
-## Active panorama — exact supplied composition
+### Desk panorama and clickable objects
 
 All five active raster assets are lossless WebP exports of the supplied files, retaining existing lettering, tape, materials and alpha. No ImageGen, replacement text, additional ground shadows or color filters were used for this revision.
 
@@ -34,9 +14,77 @@ All five active raster assets are lossless WebP exports of the supplied files, r
 - desk-about.webp: clipboard 25bb3aad, 1000 × 1000, taped About Us note.
 - desk-thaimove.webp: clipboard f4ecfba0, 2000 × 2075, wooden figure with ThaiMove Coming Soon label.
 
-Geometry was measured by registering each cutout against draft-ref.png at its native 2926 × 1081 resolution. assets/scene-layout.json records the positions and dimensions. CSS uses those normalized coordinates on a fixed aspect-ratio canvas; small screens pan the same composition. Ocean displacement is recalibrated to the narrower window. Pausing motion reveals the unmodified source background. Earlier sections below describe retained historical assets.
+Geometry was measured by registering each cutout against draft-ref.png at its native 2926 × 1081 resolution. assets/scene-layout.json records the positions and dimensions. CSS uses those normalized coordinates on a fixed aspect-ratio canvas; small screens pan the same composition. Ocean displacement is recalibrated to the narrower window. Pausing motion reveals the unmodified source background.
 
-## Active scene artwork — latest user-supplied set
+### Window photo string
+
+- Source: user-supplied photo string (2000 × 667, RGBA): seven place photos pinned on a rope with brass end knobs. The Thai captions and doodles are baked in.
+- Placement: registered against the supplied mockup, which shows the string over the window sash of the gmhbg3.png outpaint. On the native panorama it sits at x 894, y −58, 1274 px wide (`.window-photos` in styles.css).
+- Processing (OpenCV + Pillow, WebP quality 90): each photo's outline is found by a morphological opening of the alpha channel and a minimum-area rectangle. All seven photos are cut out with their sides and bottom grown by 14–16 px to keep their soft painted shadow, and the top edge left in place so the rope stays in the base. The cut-outs overlap the base by 2 px to avoid seams.
+  - assets/window-string.webp — the rope, end knobs and pegs, 2000 × 667.
+  - assets/window-photo-gomorehub.webp — the Go More Hub card (no link). It was cut out later so it can swing like the others, which leaves the other six cut-outs byte-identical.
+  - assets/window-photo-central-pattaya.webp, -huay-yai, -bang-saray, -south-pattaya, -phra-tamnak, -jomtien — one per linked photo, each linking to https://villadd.com/th/villas/<area>.
+- No pixels were repainted or recoloured.
+
+### Scene extension strips: assets/desk-extension-top.webp, assets/desk-extension-bottom.webp
+
+Cut from the supplied outpaint gmhbg3.png (2926 × 1801; removed from the repository after cutting, still available in commit 6299b5b), which continues desk-panorama.webp upward (transom window, curtain rail) and downward (desk front). The original panorama sits unchanged at y = 520; only the added areas are kept: top 2926 × 584 and bottom 2926 × 264, each overlapping the original by 64 px with a feathered alpha edge that follows the outpaint's own blend. WebP quality 84.
+
+### Official logos
+
+Copied unchanged from the user's PNG files, preserving transparency and original artwork:
+
+- assets/gomorehub-logo.png — GomoreHubLogo .png, 2200 × 2201. Used as the favicon, the header home link (on a cream tile) and the About dialog badge.
+- assets/villadd-logo.png — Logo_dark.png, 1543 × 447
+- assets/thaimove-logo.png — tmlogo.png, 1619 × 1340
+
+### Villadd showreel
+
+- Source: user-supplied villadd-launch-30s.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 29.6 s, 26.5 MB. Used unedited apart from scaling.
+- assets/villadd-showreel.webm: VP9 (CRF 36) + Opus 96 kb/s, 720 × 1280, 30 fps, about 4.4 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
+- assets/villadd-showreel.mp4: H.264 High (CRF 25) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 4.9 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
+- assets/villadd-showreel-poster.webp: the opening title card at 1.6 s ("เราคือ Villa DD"), 720 × 1280, WebP quality 82. The end card was not used because its price chips crossfade continuously.
+
+### ThaiMove showreel
+
+- Source: user-supplied ThaiMove_showreel_15s_v2.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 15 s, 6.9 MB. Used unedited apart from scaling.
+- assets/thaimove-showreel.webm: VP9 (CRF 34) + Opus 96 kb/s, 720 × 1280, 30 fps, about 1.5 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
+- assets/thaimove-showreel.mp4: H.264 High (CRF 23) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 1.6 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
+- assets/thaimove-showreel-poster.webp: the end card at 14.5 s, 720 × 1280, WebP quality 82.
+
+### Villadd concept image: assets/villadd.webp
+
+Original AI-generated illustration shown in the Villadd dialog, labelled there as not an actual listing. 1536 × 1024 WebP, quality 87.
+
+Prompt: Premium cinematic architectural photograph of a beautiful modern tropical pool villa in Thailand, cream stone architecture, open-air terrace, generous turquoise swimming pool in foreground, palm trees, lush foliage, warm late afternoon sunshine with crisp shadows, a little vivid orange pool float. Camera eye level from across the pool, wide composition, strong horizontal lines, magazine editorial art direction, realistic water caustics, tranquil aspirational holiday atmosphere. No people, text, logos or watermark. Landscape 3:2. Original conceptual brand illustration, not a real property listing.
+
+### Sound: assets/windy-beach.mp3
+
+Supplied windy beach ambience (63 s). Made into a 59 s seamless loop with a 4 s equal-power crossfade from the end into the start, then encoded as 96 kbps stereo MP3. Off by default and downloaded only when a visitor turns sound on.
+
+### Icons
+
+All icons are Lucide (ISC License), inlined as SVG in `index.html` with `stroke="currentColor"`:
+
+- Sound toggle: volume-2 and volume-x (lucide-static 0.468.0).
+- Menu button: chevron-down.
+- Motion toggle: pause and play.
+
+The chevron-down, pause and play paths were written from the current Lucide set without fetching lucide-static, because this environment has no network access to it.
+
+### Fonts
+
+DM Sans, Manrope, Noto Sans Thai and Patrick Hand, served by Google Fonts with system fallbacks. There are no analytics or tracking pixels. Only the language, motion and sound preferences are saved, in the visitor's browser.
+
+## No longer used by the page
+
+These files stay in `assets/` for provenance, but `index.html`, `styles.css` and `script.js` no longer reference them:
+
+about-note-v2.webp, contact-note-v2.webp, contact-paper-note.webp, favicon.svg, frame-supplied-shadow.webp, good-things-note.webp, hub-world.webp, phone-sunset-v2.webp, phone-supplied-shadow.webp, picture-frame-villadd.webp, picture-frame.webp, rotary-phone-contact.webp, rotary-phone.webp, thaimove.webp, villadd-frame-supplied-v3.webp, villadd-frame-v2.webp, villadd-note-v2.webp, villadd-paper-note.webp, window-sunset.webp.
+
+The prompt notes `latest-scene-edit-prompts.md` and `paper-note-prompts.md` and the geometry record `scene-layout.json` are also kept. favicon.svg, hub-world.webp and villadd-frame-v2.webp come from earlier revisions and have no recorded source. The sections below are the earlier records for the rest, kept as written.
+
+### Earlier scene artwork: user-supplied set
 
 - assets/phone-sunset-v2.webp: supplied b72e378f phone and shadow, preserved directly.
 - assets/about-note-v2.webp: supplied 48f2a169 About Us paper, preserved directly.
@@ -46,7 +94,7 @@ Geometry was measured by registering each cutout against draft-ref.png at its na
 
 All exported to WebP quality 95 with transparency. New phone and frame proportions are retained and their bases align with the desk. No CSS ground shadows are added. The supplied notes retain their baked-in lettering, texture and decoration. Exact edit prompts: assets/latest-scene-edit-prompts.md. The sections below document earlier retained assets.
 
-## Current desk objects — supplied shadows
+### Earlier desk objects: supplied shadows
 
 The page uses the exact user-supplied phone and Villadd frame composites, exported losslessly to WebP with their original transparency and painted shadows preserved:
 
@@ -55,14 +103,14 @@ The page uses the exact user-supplied phone and Villadd frame composites, export
 
 No generated or CSS ground shadows are applied to these objects. Contact Us and VillaDD are transparent raster sticky-note overlays with thick handwritten marker lettering, paper grain and curled corners, generated with built-in ImageGen from the user’s close-up reference. The original phone, frame and shadow pixels remain unchanged. The image offsets preserve the previous object positions while allowing the supplied shadow canvases to extend toward the desk edge. Earlier generated derivatives below are retained as historical sources.
 
-## Realistic paper labels
+### Earlier paper labels
 
 - assets/contact-paper-note.webp — Contact Us on two lines.
 - assets/villadd-paper-note.webp — VillaDD on one line.
 
 Both are generated transparent PNGs exported to WebP quality 95. Reference: codex-clipboard-02d5bc16-4c24-43ad-bf0b-a1cd7a3f7926.png. Typography is baked into the artwork, not a web font.
 
-## Supplied source artwork
+### Earlier supplied source artwork
 
 These four source images were supplied by the user and exported to WebP at original dimensions, quality 95, preserving transparency. The background and window note use these exports directly. The current telephone and frame use the edited derivatives documented below. The three scene objects remain independent clickable elements.
 
@@ -73,8 +121,7 @@ These four source images were supplied by the user and exported to WebP at origi
 
 Placement follows the user-provided annotated composition. The blue annotation rings are not part of the page. Highlights come from the upper right, with subtle shadows toward the lower left. Ocean motion is confined to the water in the new background.
 
-
-## Current picture frame — assets/picture-frame-villadd.webp
+### Earlier picture frame: assets/picture-frame-villadd.webp
 
 Edited from the supplied picframe.png and Cover _ Villa DD.png with built-in ImageGen. The Villadd cover replaces the beach photograph inside the white mat. Frame orientation is baked into the transparent asset; the cover lettering reads normally. Dimensions: 1254 × 1254. WebP quality 95. Placement preserves the original visible frame bounds, with sunset shadows toward the lower left. The frame still opens the product collection.
 
@@ -86,7 +133,7 @@ Replace ONLY the beach photograph inside the white mat with image 2. Fit the ent
 The website currently displays the wooden frame horizontally mirrored. Therefore produce the FRAME geometry horizontally mirrored relative to image 1, while keeping the inserted cover readable normally (do NOT mirror the cover or its lettering). The stand should be on the right, and the frame should lean slightly left as it descends, matching a horizontal reflection of image 1.
 Preserve the wooden border, white mat, original proportions, material, overall square 1254 x 1254 composition, object size, padding and transparency. Keep a subtle warm sunset illumination from upper right, consistent with the original. No surrounding table or scenery, no extra objects, no new floor shadow, no watermark. Output the finished wooden frame with the Villadd print on a genuinely transparent background.
 
-## Current telephone — assets/rotary-phone-contact.webp
+### Earlier telephone: assets/rotary-phone-contact.webp
 
 Edited from the supplied phone.png using the built-in ImageGen tool, preserving its square composition, shape, cord and transparent background. The edit adds a yellow Contact Us post-it on the front left, with warm highlights from the upper right. Dimensions: 1254 × 1254. WebP quality 95. The original telephone export is retained separately.
 
@@ -101,40 +148,8 @@ Add one pale butter-yellow paper post-it attached to the FRONT LEFT face of the 
 Relight the telephone and note to match the golden sunset from the UPPER RIGHT of image 2. Brighter warm highlights on right-facing edges, gently darker left-facing surfaces, no cold studio reflections. Keep realistic dimensional depth and preserve all original telephone details.
 Output the phone plus its attached post-it ONLY on a genuinely transparent background. Do NOT include the wooden table, window, beach, any background color or backdrop, or a large baked floor shadow. The website will add a directional ground shadow separately so it blends with the existing table. Square composition, preserve alpha, no extra objects, no watermark.
 
-## Supplied official logos
-
-Copied unchanged from the user's PNG files, preserving transparency and original artwork:
-
-- assets/gomorehub-logo.png — GomoreHubLogo .png, 2200 × 2201
-- assets/villadd-logo.png — Logo_dark.png, 1543 × 447
-- assets/thaimove-logo.png — tmlogo.png, 1619 × 1340
-
-## Scene extension strips
-
-### assets/desk-extension-top.webp, assets/desk-extension-bottom.webp
-
-Cut from the supplied outpaint gmhbg3.png (2926 × 1801; removed from the repository after cutting, still available in commit 6299b5b), which continues desk-panorama.webp upward (transom window, curtain rail) and downward (desk front). The original panorama sits unchanged at y = 520; only the added areas are kept: top 2926 × 584 and bottom 2926 × 264, each overlapping the original by 64 px with a feathered alpha edge that follows the outpaint's own blend. WebP quality 84.
-
-## Sound
-
-### assets/windy-beach.mp3
-
-Supplied windy beach ambience (63 s). Made into a 59 s seamless loop with a 4 s equal-power crossfade from the end into the start, then encoded as 96 kbps stereo MP3. Off by default and downloaded only when a visitor turns sound on.
-
-Volume icons: Lucide volume-2 and volume-x (lucide-static 0.468.0, ISC License), inlined as SVG.
-
-## Product concept images
-
-Original AI-generated illustrations, not photographs of bookable properties or screenshots of a released ThaiMove app.
-
-### assets/villadd.webp
-
-Prompt: Premium cinematic architectural photograph of a beautiful modern tropical pool villa in Thailand, cream stone architecture, open-air terrace, generous turquoise swimming pool in foreground, palm trees, lush foliage, warm late afternoon sunshine with crisp shadows, a little vivid orange pool float. Camera eye level from across the pool, wide composition, strong horizontal lines, magazine editorial art direction, realistic water caustics, tranquil aspirational holiday atmosphere. No people, text, logos or watermark. Landscape 3:2. Original conceptual brand illustration, not a real property listing.
-
 ### assets/thaimove.webp
 
+Original AI-generated illustration (1536 × 1024 WebP, quality 87), not a screenshot of a released ThaiMove app. The ThaiMove dialog now uses the showreel instead.
+
 Prompt: Striking premium sports editorial closeup of a runner's lower legs mid-stride: ivory running shoes with vivid neon lime soles and details, white crew socks, tan skin, sharp athletic gesture. Shoes float through the center of frame, one heel lifted, dynamic side-angle crop with no face, seamless pale lavender studio background, dramatic hard sunlight from upper left and crisp lavender shadows, subtle analog grain. Fashion editorial, realistic materials, airy negative space. Landscape 3:2. No text, visible brand logos, watermarks or app UI.
-
-Product images: 1536 × 1024 WebP, quality 87.
-
-Fonts: DM Sans, Manrope, Noto Sans Thai and Patrick Hand, served by Google Fonts with system fallbacks. No analytics or tracking pixels. Only language and motion preferences are saved locally.

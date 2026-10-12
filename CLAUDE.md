@@ -9,7 +9,7 @@ The Go More Hub company landing page (https://nidss.github.io/gmh/). It is a sta
 ## Commands
 
 - `npm run dev` — local preview at http://127.0.0.1:4173 (`tools/serve.mjs`, no caching).
-- `npm run check` — the only automated check: `node --check script.js` plus `tools/check.mjs`. `check.mjs` asserts unique IDs, valid `#` anchors, a `<template id="panel-X">` for every `data-open="X"`, that every referenced asset exists, and that required company content strings are present (contact details, product links). There is no test suite, linter or bundler.
+- `npm run check` — the only automated check: `node --check script.js` plus `tools/check.mjs`. `check.mjs` asserts unique IDs, valid `#` anchors, a `<template id="panel-X">` for every `data-open="X"`, that every referenced asset exists, and that required company content strings are present (contact details, product links, and the Go More Hub, Villadd and ThaiMove Facebook pages). There is no test suite, linter or bundler.
 
 ## Deploying
 
@@ -35,6 +35,12 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 - **Pan helpers:** `STOPS` drives the CSS snap markers, the edge cue buttons, the once-per-session sweep (`sessionStorage` key `gmh-tour`), and the menu "glide to object, then open dialog" behaviour.
 - **Fallbacks:** an inline head script adds the `js` class. Without `camera-ready`, the original static layout still renders, so the page works without JavaScript (the `<noscript>` note lists contacts).
 
+### Header
+
+- **Home link:** `.site-name` shows `assets/gomorehub-logo.png` on a cream tile (54 px, smaller on phones and short screens). There is no centred caption.
+- **Controls:** Menu, motion pause, sound and TH / EN sit together top right in `.header-actions`. Their icons are inline Lucide SVGs with `stroke="currentColor"`. The menu chevron-down flips when `aria-expanded` is true. The motion toggle (pause / play) and the sound toggle (volume-2 / volume-x) each hold both icons, and CSS shows one according to `aria-pressed`. Add new icons the same way, not as text glyphs.
+- **Camera:** `fitScene` measures the header's bottom edge, so a taller header moves the scene down rather than covering it.
+
 ### Effects
 
 - **Ocean:** a WebGL shader animates only the water, inside a mask written in normalized panorama coordinates in the fragment shader source. A Canvas 2D fallback clips to the same polygon. Moving or replacing the panorama means updating both masks.
@@ -45,16 +51,18 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 ### Dialogs and text
 
 - **Dialogs:** each panel is a `<template id="panel-NAME">` cloned into the single `<dialog id="hub-dialog">`. Any element with `data-open="NAME"` opens it, including scene objects and Menu items. Below 700 px the dialog is a bottom sheet that can be pulled down to close. The Villadd and ThaiMove panels are wider (`.paper-dialog:has(.dialog-split)`), with their copy on the left and a portrait showreel on the right; they stack below 860 px. A showreel plays muted on open unless motion is paused or reduced, and pauses when the dialog closes. Each `<video>` lists the H.264 MP4 before the VP9 WebM, because iOS Safari shows a black picture for the WebM.
+- **Find Us On:** three `.social-link` cards, for Go More Hub, Villadd and ThaiMove on Facebook. Each card after the first gets its own tilt.
 - **Bilingual text:** elements carry `data-th` and `data-en`, and `translate()` swaps their text content (`\n` becomes a line break). `aria-label`s that change with language are set in `setLanguage()`. New UI text needs both attributes, plus an entry there if it has a language-dependent label.
 - **Preferences:** saved in `localStorage` (`gmh-language`, `gmh-motion`, `gmh-sound`), always wrapped in try/catch.
 
 ### CSS conventions
 
-`styles.css` is mostly dense one-line rule blocks, with later, commented blocks appended that override earlier rules (camera layout, header actions, extension strips, sound toggle, dust). Edit the existing rule when changing behaviour rather than stacking another override. The phone breakpoint is `max-width:700px`, and it applies to chrome only (header, dialog sheet), not to the scene mode.
+`styles.css` is mostly dense one-line rule blocks, with later, commented blocks appended that override earlier rules (camera layout, header actions, extension strips, sound toggle, dust, window photos, showreel dialogs). Edit the existing rule when changing behaviour rather than stacking another override. The phone breakpoint is `max-width:700px`, and it applies to chrome only (header, dialog sheet), not to the scene mode.
 
 ## Content and asset rules
 
 - **Asset provenance:** `ASSETS.md` records the source or prompt and the processing for every image and sound. Update it whenever assets change.
 - **Logos:** official supplied logos are used unchanged.
+- **Dashes:** site text uses a plain hyphen (`-`), never an em dash (`—`), including the title, labels and `aria-label`s.
 - **ThaiMove:** it is "Coming Soon". Do not add a launch date or a preview link. Integration partners may be named. The supplied showreel shows Strava, Apple Health, Samsung Health, Huawei Health and Google Fit.
 - **Villadd imagery:** concept imagery that is labelled as not an actual listing.
