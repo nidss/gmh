@@ -38,9 +38,9 @@
     viewport.setAttribute('aria-label', next === 'th' ? 'ฉาก Go More Hub สามารถเลื่อนภาพเพื่อสำรวจได้' : 'Go More Hub scene. Scroll to explore.');
     document.querySelector('#explore').setAttribute('aria-label', next === 'th' ? 'เมนู Go More Hub' : 'Go More Hub menu');
     document.querySelector('.supplied-phone').setAttribute('aria-label', next === 'th' ? 'ติดต่อ Go More Hub' : 'Contact Go More Hub');
-    document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'Villadd — จองที่พักพูลวิลล่า' : 'Villadd — Pool villa booking');
+    document.querySelector('.supplied-frame').setAttribute('aria-label', next === 'th' ? 'Villadd - จองที่พักพูลวิลล่า' : 'Villadd - Pool villa booking');
     document.querySelector('.supplied-note').setAttribute('aria-label', next === 'th' ? 'เกี่ยวกับ Go More Hub' : 'About Go More Hub');
-    document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove — เร็ว ๆ นี้' : 'ThaiMove — Coming Soon');
+    document.querySelector('.supplied-figure').setAttribute('aria-label', next === 'th' ? 'ThaiMove - เร็ว ๆ นี้' : 'ThaiMove - Coming Soon');
     motionLabels();
     soundLabels();
     updateCues();
