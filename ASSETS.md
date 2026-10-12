@@ -1,5 +1,12 @@
 # Visual assets
 
+## Villadd showreel — supplied
+
+- Source: user-supplied villadd-launch-30s.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 29.6 s, 26.5 MB. Used unedited apart from scaling.
+- assets/villadd-showreel.webm: VP9 (CRF 36) + Opus 96 kb/s, 720 × 1280, 30 fps, about 4.4 MB. Listed first in the `<video>`.
+- assets/villadd-showreel.mp4: H.264 High (CRF 25) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 4.9 MB. Fallback for browsers without VP9.
+- assets/villadd-showreel-poster.webp: the opening title card at 1.6 s ("เราคือ Villa DD"), 720 × 1280, WebP quality 82. The end card was not used because its price chips crossfade continuously.
+
 ## ThaiMove showreel — supplied
 
 - Source: user-supplied ThaiMove_showreel_15s_v2.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 15 s, 6.9 MB. Used unedited apart from scaling.
