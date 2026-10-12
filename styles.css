@@ -98,7 +98,7 @@
 .dust-canvas{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
 .camera-ready .dust-canvas{display:block}
 .dust-canvas.running{opacity:1}
-/* Window photos: a supplied photo string across the window sash. Each place photo links to its Villadd area page and swings on its peg when pointed at. Placed on the native panorama from the supplied mockup; the photos sit on the 2000 × 667 strip. */
+/* Window photos: a supplied photo string across the window sash. Each place photo links to its Villadd area page; every photo, the unlinked Go More Hub card included, swings on its peg when pointed at. Placed on the native panorama from the supplied mockup; the photos sit on the 2000 × 667 strip. */
 .window-photos{position:absolute;left:30.5500%;top:-5.3373%;width:43.5506%;aspect-ratio:2000/667;pointer-events:none}
 .window-string,.window-photo img{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none}
 .window-photo{position:absolute;pointer-events:auto;transition:filter .3s ease}
@@ -110,6 +110,7 @@
 .photo-huay-yai{left:16.8000%;top:31.6342%;width:14.1000%;height:47.2264%;transform-origin:56.51% 7.61%}
 .photo-bang-saray{left:29.5000%;top:38.3808%;width:13.7500%;height:44.6777%;transform-origin:53.4% 4.58%}
 .photo-south-pattaya{left:42.7500%;top:41.3793%;width:12.7500%;height:43.3283%;transform-origin:50.87% 1.94%}
+.photo-gomorehub{left:55.8500%;top:40.0300%;width:13.2500%;height:44.3778%;transform-origin:47.38% 3.32%}
 .photo-phra-tamnak{left:68.8500%;top:33.7331%;width:14.7500%;height:48.4258%;transform-origin:43.72% 6.35%}
 .photo-jomtien{left:82.6500%;top:25.9370%;width:14.3500%;height:49.1754%;transform-origin:38.03% 6.69%}
 /* Product dialogs with a showreel (Villadd, ThaiMove): the copy on the left, the portrait video on the right; stacked on narrow screens. */
