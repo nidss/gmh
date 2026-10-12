@@ -56,5 +56,5 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 
 - **Asset provenance:** `ASSETS.md` records the source or prompt and the processing for every image and sound. Update it whenever assets change.
 - **Logos:** official supplied logos are used unchanged.
-- **ThaiMove:** it is "Coming Soon". Do not add a launch date, integration partners, or a preview link.
+- **ThaiMove:** it is "Coming Soon". Do not add a launch date or a preview link. Integration partners may be named. The supplied showreel shows Strava, Apple Health, Samsung Health, Huawei Health and Google Fit.
 - **Villadd imagery:** concept imagery that is labelled as not an actual listing.

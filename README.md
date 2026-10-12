@@ -67,7 +67,7 @@ When `styles.css` or `script.js` changes, bump the `?v=` number on their links i
 
 ## Content notes
 
-- ThaiMove is in development. No launch date or integration partners are claimed.
+- ThaiMove is in development. No launch date is claimed. Its showreel names the fitness apps it connects to (Strava, Apple Health, Samsung Health, Huawei Health, Google Fit).
 - The Villadd dialog image is AI-generated concept imagery, not an actual property listing.
 - Contact details and the Facebook link are provided by the company.
 - Image and sound provenance, prompts and processing are in [ASSETS.md](ASSETS.md).
