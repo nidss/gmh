@@ -74,6 +74,9 @@
     dialog.scrollTop = 0;
     if (!dialog.open) dialog.showModal();
     closeButton.focus({ preventScroll:true });
+    // A dialog showreel plays muted on its own unless motion is paused; its controls can start it or turn on sound.
+    const video = dialogBody.querySelector('video');
+    if (video && !paused && !reducedMotion.matches) video.play().catch(() => { /* Autoplay can be refused. */ });
     syncEffects();
   }
   languageButton.addEventListener('click', () => setLanguage(language === 'th' ? 'en' : 'th'));
@@ -123,6 +126,7 @@
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
   dialog.addEventListener('close', () => {
+    dialogBody.querySelector('video')?.pause();
     returnFocus?.focus({ preventScroll:true });
     syncEffects();
   });
