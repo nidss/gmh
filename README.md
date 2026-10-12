@@ -74,3 +74,4 @@ When `styles.css` or `script.js` changes, bump the `?v=` number on their links i
 - Contact details and the Facebook links are provided by the company.
 - Image, video and sound provenance, prompts and processing are in [ASSETS.md](ASSETS.md).
 - Notes for working on the code are in [CLAUDE.md](CLAUDE.md).
+- A handoff for porting the site to React or Next.js (in Thai) is in [docs/handoff/](docs/handoff/README.md).
