@@ -26,7 +26,6 @@
     motionButton.querySelector('.motion-label').textContent = paused
       ? (language === 'th' ? 'เล่น motion' : 'Play motion')
       : (language === 'th' ? 'พัก motion' : 'Pause motion');
-    motionButton.querySelector('.motion-icon').textContent = paused ? '▶' : 'Ⅱ';
   }
   function setLanguage(next) {
     language = next;
