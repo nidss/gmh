@@ -59,6 +59,10 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 
 `styles.css` is mostly dense one-line rule blocks, with later, commented blocks appended that override earlier rules (camera layout, header actions, extension strips, sound toggle, dust, window photos, showreel dialogs). Edit the existing rule when changing behaviour rather than stacking another override. The phone breakpoint is `max-width:700px`, and it applies to chrome only (header, dialog sheet), not to the scene mode.
 
+## Handoff docs
+
+`docs/handoff/` (in Thai) explains how to port the site to React (`react.md`) or Next.js (`nextjs.md`), with the shared behaviour spec and acceptance checklist in `README.md`. It cites `script.js` line ranges and asset counts, so update it when behaviour, files or those ranges change.
+
 ## Content and asset rules
 
 - **Asset provenance:** `ASSETS.md` records the source or prompt and the processing for every image and sound. Update it whenever assets change.
