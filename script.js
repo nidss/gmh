@@ -143,7 +143,8 @@
   // Camera: every screen sees the same world. Wide screens fit all four objects; tall or narrow screens pan along the desk.
   const SCENE_W = 2926, SCENE_H = 1081;
   // Object bounds on the native canvas (from the measured positions in styles.css), with a small margin.
-  const SAFE = { x0:.245, x1:.83, y0:.33, y1:.98 };
+  // The top edge is the photo string on the window sash, so it is never hidden under the header.
+  const SAFE = { x0:.245, x1:.83, y0:0, y1:.98 };
   // The supplied outpaint continues the scene 520px above and 200px below the original panorama.
   const EXTEND_TOP = 520 / SCENE_H, EXTEND_BOTTOM = 200 / SCENE_H;
   const NOTE_H = .1386 * SCENE_H;
@@ -195,7 +196,8 @@
     root.style.setProperty('--world-w', width + 'px');
     root.style.setProperty('--world-x', Math.round(x) + 'px');
     root.style.setProperty('--world-y', Math.round(y) + 'px');
-    root.style.setProperty('--cue-y', Math.round(y + height * .2) + 'px');
+    // Edge tags sit over the open sea, below the window photos and between the desk objects.
+    root.style.setProperty('--cue-y', Math.round(y + height * .53) + 'px');
     root.classList.toggle('scene-fit', mode === 'fit');
     root.classList.toggle('scene-pan', mode === 'pan');
     camera.mode = mode;
