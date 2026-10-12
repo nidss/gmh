@@ -1,5 +1,14 @@
 # Visual assets
 
+## Window photo string — supplied
+
+- Source: user-supplied photo string (2000 × 667, RGBA): seven place photos pinned on a rope with brass end knobs. The Thai captions and doodles are baked in.
+- Placement: registered against the supplied mockup, which shows the string over the window sash of the gmhbg3.png outpaint. On the native panorama it sits at x 894, y −58, 1274 px wide (`.window-photos` in styles.css).
+- Processing (OpenCV + Pillow, WebP quality 90): each photo's outline is found by a morphological opening of the alpha channel and a minimum-area rectangle. Six photos are cut out with their sides and bottom grown by 14–16 px to keep their soft painted shadow, and the top edge left in place so the rope stays in the base. The cut-outs overlap the base by 2 px to avoid seams.
+  - assets/window-string.webp — the rope, end knobs, pegs and the Go More Hub card (no link), 2000 × 667.
+  - assets/window-photo-central-pattaya.webp, -huay-yai, -bang-saray, -south-pattaya, -phra-tamnak, -jomtien — one per linked photo, each linking to https://villadd.com/th/villas/<area>.
+- No pixels were repainted or recoloured.
+
 ## Active panorama — exact supplied composition
 
 All five active raster assets are lossless WebP exports of the supplied files, retaining existing lettering, tape, materials and alpha. No ImageGen, replacement text, additional ground shadows or color filters were used for this revision.

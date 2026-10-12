@@ -23,14 +23,15 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 
 - **One coordinate system:** everything is laid out on the native 2926 × 1081 panorama (`assets/desk-panorama.webp`). `.world` keeps that aspect ratio.
 - **Clickable objects:** the four objects (`.supplied-phone`, `.supplied-frame`, `.supplied-note`, `.supplied-figure`) are positioned with percentages at the end of `styles.css`, measured against the placement reference. They are pre-cut images with their sticky-note labels baked in.
+- **Window photos:** `.window-photos` places a supplied photo string across the window sash, partly above the panorama (top `-5.3373%`). `window-string.webp` holds the rope, pegs and the unlinked Go More Hub card. The six place photos are separate cut-outs positioned in strip percentages, each an `<a>` to its `villadd.com/th/villas/<area>` page that swings about its peg on hover or focus.
 - **Extension strips:** `desk-extension-top.webp` and `desk-extension-bottom.webp` continue the room above and below the panorama. They are cut from a supplied outpaint, `gmhbg3.png` (2926 × 1801), which is no longer in the working tree (recover it with `git show 6299b5b:assets/gmhbg3.png > gmhbg3.png`). In that image the original sits unchanged at y = 520, and each overlaps the panorama by 64 px with a feathered edge (hence the `5.9204%` offsets in CSS). If the panorama changes, re-cut the strips the same way.
 
 ### Camera (`fitScene` in `script.js`)
 
-- **Mode choice:** the camera picks a mode from object bounds, not from a width breakpoint. `SAFE` is the box containing all four objects. `NOTE_H` is the smallest object's height, used to check it stays tappable.
+- **Mode choice:** the camera picks a mode from object bounds, not from a width breakpoint. `SAFE` is the box containing all four objects and the window photos (so its top is the panorama's top edge). `NOTE_H` is the smallest object's height, used to check it stays tappable.
 - **`scene-fit`:** used when all objects fit with tappable sizes and the scene fills at least 55% of the screen height. Wide screens show the panorama exactly as designed.
 - **`scene-pan`:** used otherwise, typically phones and iPad portrait. The viewport scrolls horizontally.
-- **CSS output:** `fitScene` writes `--world-w`, `--world-x`, `--world-y` and `--cue-y` on `<html>`, and toggles the `camera-ready`, `scene-fit` and `scene-pan` classes. `place()` keeps objects clear of the header controls, and lets the extension strips cover any space the panorama cannot.
+- **CSS output:** `fitScene` writes `--world-w`, `--world-x`, `--world-y` and `--cue-y` (the edge tags, over the open sea at 53% of panorama height) on `<html>`, and toggles the `camera-ready`, `scene-fit` and `scene-pan` classes. `place()` keeps objects clear of the header controls, and lets the extension strips cover any space the panorama cannot.
 - **Pan helpers:** `STOPS` drives the CSS snap markers, the edge cue buttons, the once-per-session sweep (`sessionStorage` key `gmh-tour`), and the menu "glide to object, then open dialog" behaviour.
 - **Fallbacks:** an inline head script adds the `js` class. Without `camera-ready`, the original static layout still renders, so the page works without JavaScript (the `<noscript>` note lists contacts).
 
