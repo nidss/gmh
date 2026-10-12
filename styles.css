@@ -112,11 +112,11 @@
 .photo-south-pattaya{left:42.7500%;top:41.3793%;width:12.7500%;height:43.3283%;transform-origin:50.87% 1.94%}
 .photo-phra-tamnak{left:68.8500%;top:33.7331%;width:14.7500%;height:48.4258%;transform-origin:43.72% 6.35%}
 .photo-jomtien{left:82.6500%;top:25.9370%;width:14.3500%;height:49.1754%;transform-origin:38.03% 6.69%}
-/* ThaiMove dialog: the copy on the left, the portrait showreel on the right; stacked on narrow screens. */
-.paper-dialog[data-panel=thaimove]{width:min(940px,calc(100vw - 36px))}
-.paper-dialog[data-panel=thaimove] .dialog-body{padding-top:64px}
+/* Product dialogs with a showreel (Villadd, ThaiMove): the copy on the left, the portrait video on the right; stacked on narrow screens. */
+.paper-dialog:has(.dialog-split){width:min(940px,calc(100vw - 36px))}
+.paper-dialog:has(.dialog-split) .dialog-body{padding-top:64px}
 .dialog-split{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:40px;align-items:center}
 .dialog-video{margin:0;align-self:center}
 .dialog-video video{display:block;width:100%;height:auto;object-fit:cover;background:#0c0c0c;border:6px solid #fff9eb;border-radius:4px;box-shadow:1px 4px 14px #46361533}
-@media(max-width:860px){.paper-dialog[data-panel=thaimove]{width:min(640px,calc(100vw - 36px))}.paper-dialog[data-panel=thaimove] .dialog-body{padding-top:45px}.dialog-split{grid-template-columns:1fr;gap:26px}.dialog-video{width:min(100%,300px);margin:0 auto}}
-@media(max-width:700px){.paper-dialog[data-panel=thaimove]{width:100%}}
+@media(max-width:860px){.paper-dialog:has(.dialog-split){width:min(640px,calc(100vw - 36px))}.paper-dialog:has(.dialog-split) .dialog-body{padding-top:45px}.dialog-split{grid-template-columns:1fr;gap:26px}.dialog-video{width:min(100%,300px);margin:0 auto}}
+@media(max-width:700px){.paper-dialog:has(.dialog-split){width:100%}}
