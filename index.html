@@ -17,18 +17,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=26">
+  <link rel="stylesheet" href="styles.css?v=29">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="script.js?v=24" defer></script>
+  <script src="script.js?v=27" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#explore" data-th="ข้ามไปยังเมนู" data-en="Skip to menu">ข้ามไปยังเมนู</a>
   <header class="site-header">
-    <a class="site-name" href="./" aria-label="Go More Hub home">GO MORE HUB<span class="header-dot"></span></a>
-    <span class="header-caption" data-th="โลกเล็ก ๆ ของความเป็นไปได้" data-en="A LITTLE WORLD OF POSSIBILITIES">โลกเล็ก ๆ ของความเป็นไปได้</span>
+    <a class="site-name" href="./" aria-label="Go More Hub home"><img src="assets/gomorehub-logo.png" width="2200" height="2201" alt=""></a>
     <div class="header-actions">
       <nav class="explore-menu" id="explore" tabindex="-1" aria-label="เมนู Go More Hub">
-        <button id="explore-toggle" aria-expanded="false" aria-controls="explore-list"><span data-th="เมนู" data-en="Menu">เมนู</span><span class="menu-chevron" aria-hidden="true">⌃</span></button>
+        <button id="explore-toggle" aria-expanded="false" aria-controls="explore-list"><span data-th="เมนู" data-en="Menu">เมนู</span><svg class="menu-chevron" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
         <div id="explore-list" hidden>
           <span class="menu-title">FIND YOUR NEXT MORE</span>
           <button data-open="about">About Us <span>01</span></button>
@@ -139,15 +138,17 @@
     <h2 >Contact Us<span class="ink-spark">↗</span></h2>
     <p class="dialog-lead" data-th="ยินดีที่ได้รู้จักคุณ" data-en="It's good to meet you.">ยินดีที่ได้รู้จักคุณ</p>
     <div class="contact-block"><span class="field-label" data-th="บริษัท" data-en="COMPANY">บริษัท</span><p class="company-name" data-th="บริษัท โก มอร์ ฮับ จำกัด" data-en="Go More Hub Co., Ltd.">บริษัท โก มอร์ ฮับ จำกัด</p></div>
-    <div class="contact-block"><span class="field-label" data-th="ที่อยู่" data-en="ADDRESS">ที่อยู่</span><address data-th="666/66 หมู่ที่ 5 ตำบลนาเกลือ\nอำเภอบางละมุง จังหวัดชลบุรี 20150" data-en="666/66 Moo 5, Na Kluea,\nBang Lamung, Chon Buri 20150, Thailand">666/66 หมู่ที่ 5 ตำบลนาเกลือ<br>อำเภอบางละมุง จังหวัดชลบุรี 20150</address><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=666%2F66%20%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%205%20%E0%B8%99%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD%20%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A5%E0%B8%B0%E0%B8%A1%E0%B8%B8%E0%B8%87%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%2020150" target="_blank" rel="noopener noreferrer"><span data-th="ค้นหาที่อยู่บน Google Maps" data-en="Search this address on Google Maps">ค้นหาที่อยู่บน Google Maps</span> ↗</a></div>
+    <div class="contact-block"><span class="field-label" data-th="ที่อยู่" data-en="ADDRESS">ที่อยู่</span><address data-th="666/66 หมู่ที่ 5 ตำบลนาเกลือ อำเภอบางละมุง จังหวัดชลบุรี 20150" data-en="666/66 Moo 5, Na Kluea, Bang Lamung, Chon Buri 20150, Thailand">666/66 หมู่ที่ 5 ตำบลนาเกลือ อำเภอบางละมุง จังหวัดชลบุรี 20150</address><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=666%2F66%20%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%205%20%E0%B8%99%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD%20%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A5%E0%B8%B0%E0%B8%A1%E0%B8%B8%E0%B8%87%20%E0%B8%8A%E0%B8%A5%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5%2020150" target="_blank" rel="noopener noreferrer"><span data-th="ค้นหาที่อยู่บน Google Maps" data-en="Search this address on Google Maps">ค้นหาที่อยู่บน Google Maps</span> ↗</a></div>
     <div class="contact-block email-block"><span class="field-label">EMAIL</span><a class="email-link" href="mailto:support@villadd.com">support@villadd.com</a><button class="copy-email" data-copy="support@villadd.com" data-th="คัดลอกอีเมล" data-en="Copy email">คัดลอกอีเมล</button><span class="copy-status" role="status" aria-live="polite"></span></div>
     <p class="dialog-signoff">A CONVERSATION CAN GO A LONG WAY.</p>
   </template>
   <template id="panel-social">
     <h2 >Find Us On<span class="ink-spark">☺</span></h2>
     <p class="dialog-lead" data-th="มาเชื่อมต่อกันอีกหน่อย" data-en="Let's stay connected.">มาเชื่อมต่อกันอีกหน่อย</p>
-    <p data-th="ติดตามเรื่องราวและข่าวสารของ Go More Hub ผ่านช่องทาง Facebook ของเรา" data-en="Find Go More Hub on Facebook for our stories and updates.">ติดตามเรื่องราวและข่าวสารของ Go More Hub ผ่านช่องทาง Facebook ของเรา</p>
+    <p data-th="ติดตามเรื่องราวและข่าวสารของ Go More Hub, Villadd และ ThaiMove ผ่านช่องทาง Facebook ของเรา" data-en="Find Go More Hub, Villadd and ThaiMove on Facebook for our stories and updates.">ติดตามเรื่องราวและข่าวสารของ Go More Hub, Villadd และ ThaiMove ผ่านช่องทาง Facebook ของเรา</p>
     <a class="social-link" href="https://www.facebook.com/gomorehub" target="_blank" rel="noopener noreferrer"><span class="facebook-letter" aria-hidden="true">f</span><span><strong>Go More Hub</strong><small>facebook.com/gomorehub</small></span><b aria-hidden="true">↗</b></a>
+    <a class="social-link" href="https://www.facebook.com/villadd.gomorehub" target="_blank" rel="noopener noreferrer"><span class="facebook-letter" aria-hidden="true">f</span><span><strong>Villadd</strong><small>facebook.com/villadd.gomorehub</small></span><b aria-hidden="true">↗</b></a>
+    <a class="social-link" href="https://www.facebook.com/thaimove.gomorehub" target="_blank" rel="noopener noreferrer"><span class="facebook-letter" aria-hidden="true">f</span><span><strong>ThaiMove</strong><small>facebook.com/thaimove.gomorehub</small></span><b aria-hidden="true">↗</b></a>
     <p class="dialog-signoff">GOOD THINGS ARE BETTER TOGETHER.</p>
   </template>
   <template id="panel-idea">
