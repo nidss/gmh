@@ -103,7 +103,7 @@
 .window-string,.window-photo img{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none}
 .window-photo{position:absolute;pointer-events:auto;transition:filter .3s ease}
 .window-photo:focus-visible{outline-offset:2px}
-.window-photo:is(:hover,:focus-visible){filter:drop-shadow(0 0 .5cqw #fff1c4) brightness(1.06);animation:photo-swing 1.3s ease-out}
+.window-photo:is(:hover,:focus-visible){animation:photo-swing 1.3s ease-out}
 .window-photo:active{filter:brightness(.97)}
 @keyframes photo-swing{20%{transform:rotate(-3.5deg)}45%{transform:rotate(2.5deg)}70%{transform:rotate(-1.2deg)}88%{transform:rotate(.4deg)}}
 .photo-central-pattaya{left:2.9500%;top:25.4873%;width:14.1500%;height:46.0270%;transform-origin:60.75% 5.09%}
