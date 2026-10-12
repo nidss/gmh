@@ -1,5 +1,12 @@
 # Visual assets
 
+## ThaiMove showreel — supplied
+
+- Source: user-supplied ThaiMove_showreel_15s_v2.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 15 s, 6.9 MB. Used unedited apart from scaling.
+- assets/thaimove-showreel.webm: VP9 (CRF 34) + Opus 96 kb/s, 720 × 1280, 30 fps, about 1.5 MB. Listed first in the `<video>`.
+- assets/thaimove-showreel.mp4: H.264 High (CRF 23) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 1.6 MB. Fallback for browsers without VP9.
+- assets/thaimove-showreel-poster.webp: the end card at 14.5 s, 720 × 1280, WebP quality 82.
+
 ## Window photo string — supplied
 
 - Source: user-supplied photo string (2000 × 667, RGBA): seven place photos pinned on a rope with brass end knobs. The Thai captions and doodles are baked in.
