@@ -10,12 +10,13 @@ The page is one interactive painted scene: a warm seaside desk at sunset. Clicki
 | --- | --- |
 | About Us post-it on the window frame | About Go More Hub, with links to both products |
 | Rotary phone with a Contact Us post-it | Contact: company name, address with a Google Maps search, and email with a copy button |
-| Villadd picture frame | Villadd, the pool villa booking platform, linking to villadd.com |
-| Wooden figure with a ThaiMove post-it | ThaiMove (Coming Soon) |
+| Villadd picture frame | Villadd, the pool villa booking platform, linking to villadd.com, with a 30-second showreel |
+| Wooden figure with a ThaiMove post-it | ThaiMove (Coming Soon), with a 15-second showreel |
+| Photo string across the window | Six place photos, each linking to its Villadd area page (Central Pattaya, Huay Yai, Bang Saray, South Pattaya, Phra Tamnak, Jomtien). The Go More Hub card has no link. Every photo swings on its peg when pointed at. |
 
-The **Menu** at the top right opens every section directly, including **Find Us On**, which links to the Facebook page.
+The **Menu** at the top right opens every section directly, including **Find Us On**, which links to the Facebook pages of Go More Hub, Villadd and ThaiMove.
 
-All four objects follow measured coordinates on the 2926 × 1081 panorama. The supplied cutouts already include their labels, and the official logos are used unchanged.
+The four desk objects and the photo string follow measured coordinates on the 2926 × 1081 panorama. The supplied cutouts already include their labels, and the official logos are used unchanged.
 
 ## Every screen, one world
 
@@ -28,7 +29,7 @@ The page doesn't switch to a separate mobile layout. It keeps the same scene and
   - The first visit in a session sweeps once along the desk.
   - Choosing a Menu item glides the camera to its object before opening it.
 - **Extension strips:** where the screen is taller than the panorama, strips cut from a supplied outpaint continue the room above (transom window, curtain rail) and below (desk front).
-- **Dialogs:** on phones they rise as a paper sheet that can be pulled down to close.
+- **Dialogs:** on phones they rise as a paper sheet that can be pulled down to close. The Villadd and ThaiMove dialogs place their copy beside a portrait showreel on wide screens, and stack it below on narrow ones.
 
 The camera decides between fit and pan from the measured object bounds and the size of the smallest object, not from a width breakpoint.
 
@@ -40,8 +41,8 @@ The camera decides between fit and pan from the measured object bounds and the s
 
 ## Controls and accessibility
 
-- The Menu, motion pause, sound and TH / EN controls sit together at the top right, so nothing covers the desk.
-- Motion pauses automatically for the system reduced-motion setting, a hidden tab or an open dialog. The pause button stops it by hand.
+- The Go More Hub logo at the top left links home. The Menu, motion pause, sound and TH / EN controls sit together at the top right, so nothing covers the desk. Their icons are from Lucide.
+- Motion pauses automatically for the system reduced-motion setting, a hidden tab or an open dialog. The pause button stops it by hand. The showreels play muted and looped when their dialog opens, except while motion is paused, and stop when it closes.
 - Dialogs are native and accessible: Escape closes them and keyboard focus is restored. There is also a skip link to the Menu.
 - Language, motion and sound choices are stored locally only. There is no analytics or tracking.
 - Without JavaScript, the static scene still shows and a note lists the contact details.
@@ -69,6 +70,7 @@ When `styles.css` or `script.js` changes, bump the `?v=` number on their links i
 
 - ThaiMove is in development. No launch date is claimed. Its showreel names the fitness apps it connects to (Strava, Apple Health, Samsung Health, Huawei Health, Google Fit).
 - The Villadd dialog image is AI-generated concept imagery, not an actual property listing.
-- Contact details and the Facebook link are provided by the company.
-- Image and sound provenance, prompts and processing are in [ASSETS.md](ASSETS.md).
+- The Villadd showreel shows real listings and prices. The Villadd area links on the photo string go to villadd.com.
+- Contact details and the Facebook links are provided by the company.
+- Image, video and sound provenance, prompts and processing are in [ASSETS.md](ASSETS.md).
 - Notes for working on the code are in [CLAUDE.md](CLAUDE.md).
