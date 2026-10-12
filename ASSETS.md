@@ -3,15 +3,15 @@
 ## Villadd showreel — supplied
 
 - Source: user-supplied villadd-launch-30s.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 29.6 s, 26.5 MB. Used unedited apart from scaling.
-- assets/villadd-showreel.webm: VP9 (CRF 36) + Opus 96 kb/s, 720 × 1280, 30 fps, about 4.4 MB. Listed first in the `<video>`.
-- assets/villadd-showreel.mp4: H.264 High (CRF 25) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 4.9 MB. Fallback for browsers without VP9.
+- assets/villadd-showreel.webm: VP9 (CRF 36) + Opus 96 kb/s, 720 × 1280, 30 fps, about 4.4 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
+- assets/villadd-showreel.mp4: H.264 High (CRF 25) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 4.9 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
 - assets/villadd-showreel-poster.webp: the opening title card at 1.6 s ("เราคือ Villa DD"), 720 × 1280, WebP quality 82. The end card was not used because its price chips crossfade continuously.
 
 ## ThaiMove showreel — supplied
 
 - Source: user-supplied ThaiMove_showreel_15s_v2.mp4, 1080 × 1920, 60 fps, H.264 + AAC, 15 s, 6.9 MB. Used unedited apart from scaling.
-- assets/thaimove-showreel.webm: VP9 (CRF 34) + Opus 96 kb/s, 720 × 1280, 30 fps, about 1.5 MB. Listed first in the `<video>`.
-- assets/thaimove-showreel.mp4: H.264 High (CRF 23) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 1.6 MB. Fallback for browsers without VP9.
+- assets/thaimove-showreel.webm: VP9 (CRF 34) + Opus 96 kb/s, 720 × 1280, 30 fps, about 1.5 MB. Fallback for browsers without H.264 (some open-source Chromium builds).
+- assets/thaimove-showreel.mp4: H.264 High (CRF 23) + AAC 128 kb/s, 720 × 1280, 30 fps, faststart, about 1.6 MB. Listed first in the `<video>`: iOS Safari reports VP9 WebM as playable but shows a black picture, so MP4 must come first.
 - assets/thaimove-showreel-poster.webp: the end card at 14.5 s, 720 × 1280, WebP quality 82.
 
 ## Window photo string — supplied

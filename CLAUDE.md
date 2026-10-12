@@ -44,7 +44,7 @@ When `styles.css` or `script.js` changes, bump the `?v=N` query on both referenc
 
 ### Dialogs and text
 
-- **Dialogs:** each panel is a `<template id="panel-NAME">` cloned into the single `<dialog id="hub-dialog">`. Any element with `data-open="NAME"` opens it, including scene objects and Menu items. Below 700 px the dialog is a bottom sheet that can be pulled down to close. The Villadd and ThaiMove panels are wider (`.paper-dialog:has(.dialog-split)`), with their copy on the left and a portrait showreel on the right; they stack below 860 px. A showreel plays muted on open unless motion is paused or reduced, and pauses when the dialog closes.
+- **Dialogs:** each panel is a `<template id="panel-NAME">` cloned into the single `<dialog id="hub-dialog">`. Any element with `data-open="NAME"` opens it, including scene objects and Menu items. Below 700 px the dialog is a bottom sheet that can be pulled down to close. The Villadd and ThaiMove panels are wider (`.paper-dialog:has(.dialog-split)`), with their copy on the left and a portrait showreel on the right; they stack below 860 px. A showreel plays muted on open unless motion is paused or reduced, and pauses when the dialog closes. Each `<video>` lists the H.264 MP4 before the VP9 WebM, because iOS Safari shows a black picture for the WebM.
 - **Bilingual text:** elements carry `data-th` and `data-en`, and `translate()` swaps their text content (`\n` becomes a line break). `aria-label`s that change with language are set in `setLanguage()`. New UI text needs both attributes, plus an entry there if it has a language-dependent label.
 - **Preferences:** saved in `localStorage` (`gmh-language`, `gmh-motion`, `gmh-sound`), always wrapped in try/catch.
 
